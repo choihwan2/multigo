@@ -8,18 +8,24 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="multicampus.project.multigo.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_key"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="multicampus.project.multigo.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_receipts"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="multicampus.project.multigo.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_stores"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_more"
+        android:name="multicampus.project.multigo.ui.mores.MoresFragment"
+        android:label="@string/title_more"
+        tools:layout="@layout/fragment_more" />
 </navigation>

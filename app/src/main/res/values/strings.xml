@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MultiGo</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_key">Key</string>
+    <string name="title_receipts">Receipts</string>
+    <string name="title_stores">Stores</string>
+    <string name="title_more">More</string>
 </resources>

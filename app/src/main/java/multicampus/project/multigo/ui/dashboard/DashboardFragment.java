@@ -1,22 +1,35 @@
 package multicampus.project.multigo.ui.dashboard;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import multicampus.project.multigo.MainActivity;
 import multicampus.project.multigo.R;
 
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
+    private Button btn;
+
+    @Override
+    public void onDestroy() {
+        Log.i("Fragment","onDestroy()호출");
+        super.onDestroy();
+    }
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -24,12 +37,24 @@ public class DashboardFragment extends Fragment {
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         final TextView textView = root.findViewById(R.id.text_dashboard);
+        ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
+        actionBar.show();
+        btn = root.findViewById(R.id.btn_dashboard);
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
         });
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dashboardViewModel.upText();
+            }
+        });
+
+
         return root;
     }
 }

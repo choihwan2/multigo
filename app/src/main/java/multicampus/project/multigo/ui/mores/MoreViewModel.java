@@ -1,16 +1,16 @@
-package multicampus.project.multigo.ui.home;
+package multicampus.project.multigo.ui.mores;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class MoreViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public MoreViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Hello, Choi");
+        mText.setValue("This is More fragment");
     }
 
     public LiveData<String> getText() {
