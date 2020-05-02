@@ -26,8 +26,6 @@ public class MoresFragment extends Fragment {
         moreViewModel =
                 ViewModelProviders.of(this).get(MoreViewModel.class);
         View root = inflater.inflate(R.layout.fragment_more, container, false);
-        ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
-        actionBar.show();
         final TextView textView = root.findViewById(R.id.text_more);
         moreViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

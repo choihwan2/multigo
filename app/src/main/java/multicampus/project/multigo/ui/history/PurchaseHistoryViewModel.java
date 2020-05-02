@@ -1,4 +1,4 @@
-package multicampus.project.multigo.ui.dashboard;
+package multicampus.project.multigo.ui.history;
 
 import android.util.Log;
 
@@ -6,12 +6,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+public class PurchaseHistoryViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
     private int cntNum = 0;
 
-    public DashboardViewModel() {
+    public PurchaseHistoryViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is dashboard fragment" + cntNum);
         Log.i("DashboardViewModel" , "DashboardViewModel() 실행");
