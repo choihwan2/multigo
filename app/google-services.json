@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "247182158170",
+    "firebase_url": "https://multigo-53825.firebaseio.com",
+    "project_id": "multigo-53825",
+    "storage_bucket": "multigo-53825.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247182158170:android:9b21001da572f3b93c2b63",
+        "android_client_info": {
+          "package_name": "multicampus.project.multigo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "247182158170-mvl4rfgnart8stvr45u912ma338jta5m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "multicampus.project.multigo",
+            "certificate_hash": "01601b72ab412b75dfe7250651d693cc97170d60"
+          }
+        },
+        {
+          "client_id": "247182158170-r586rqrteeus7vk4q9od6v49n6hc76ne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCj0WeyS-CjVaq3gAH3tiTzZLy0JDHXoew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "247182158170-r586rqrteeus7vk4q9od6v49n6hc76ne.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
