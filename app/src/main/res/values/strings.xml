@@ -6,4 +6,7 @@
     <string name="title_more">More</string>
     <string name="fail_login_access">아이디 혹은 비밀번호가 올바르지 않습니다.</string>
 
+    <string name="login_btn_sign_in">로그인</string>
+    <string name="login_btn_sign_up">회원가입</string>
+
 </resources>

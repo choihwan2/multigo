@@ -18,16 +18,14 @@ import multicampus.project.multigo.R;
 
 public class PurchaseHistoryFragment extends Fragment {
 
-    private PurchaseHistoryViewModel historyViewModel
-            ;
+    private PurchaseHistoryViewModel historyViewModel;
     private Button btn;
 
     @Override
     public void onDestroy() {
-        Log.i("Fragment","onDestroy()호출");
+        Log.i("Fragment", "onDestroy()호출");
         super.onDestroy();
     }
-
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,

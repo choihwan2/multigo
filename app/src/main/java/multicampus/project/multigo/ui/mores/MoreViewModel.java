@@ -10,7 +10,7 @@ public class MoreViewModel extends ViewModel {
 
     public MoreViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is More fragment");
+        mText.setValue("설명이 들어갈 공간입니다.");
     }
 
     public LiveData<String> getText() {

@@ -2,46 +2,48 @@ package multicampus.project.multigo.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import multicampus.project.multigo.MainActivity;
 import multicampus.project.multigo.R;
-import multicampus.project.multigo.utils.SharedPrefManager;
 
 public class LoginActivity extends AppCompatActivity {
-    final String TAG = this.getClass().getName();
 
-    private Button mLoginBtn;
+    private FirebaseAuth mAuth;
+    private Button mSignInBtn;
+    private Button mSignUpBtn;
     private EditText mInputId;
     private EditText mInputPw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (!SharedPrefManager.getUserID(this).equals("")) {
-            finish();
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        } else {
-            setContentView(R.layout.activity_login);
-
-            initView();
-            initListener();
-        }
+        setContentView(R.layout.activity_login);
+        initView();
+        initListener();
     }
 
 
     private void initView() {
-        mLoginBtn = findViewById(R.id.login_btn);
+        mSignInBtn = findViewById(R.id.login_sign_in);
+        mSignUpBtn = findViewById(R.id.login_sign_up);
         mInputId = findViewById(R.id.login_id);
         mInputPw = findViewById(R.id.login_pw);
+        mAuth = FirebaseAuth.getInstance();
 
         mInputId.clearFocus();
         mInputPw.clearFocus();
@@ -49,64 +51,76 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initListener() {
-        mLoginBtn.setOnClickListener(new View.OnClickListener() {
+        mSignInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                accessLogin(mInputId.getText().toString(), mInputPw.getText().toString());
-//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                startActivity(intent);
+                signIn(mInputId.getText().toString(),mInputPw.getText().toString());
+            }
+        });
+
+        mSignUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signUp(mInputId.getText().toString(), mInputPw.getText().toString());
             }
         });
     }
 
-    private void resultLogin(final boolean res, final String id, final String pw) {
-        if (res) {
-            SharedPrefManager.writeUserInfo(getApplicationContext(), id);
-            final String token = SharedPrefManager.getFCMToken(this);
+    private void signUp(String id, String password) {
+        mAuth.createUserWithEmailAndPassword(id, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("LoginActivity", "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName("최환").build();
+                            user.updateProfile(profileUpdates);
+                            upDateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("LoginActivity", "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
 
-            // id를 통해 해당 사용자의 레코드를 찾고 토큰을 업데이트
-            final String[] query = {"token=" + token};
-            try {
-                // 로그인을 처리할 공간
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            finish();
-
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-        } else {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(getApplicationContext(), getString(R.string.fail_login_access), Toast.LENGTH_SHORT).show();
-                }
-            });
-
-        }
-    }
-
-    private void accessLogin(final String id, final String pw) {
-        if (id.equals("") || pw.equals("")) {
-            Toast.makeText(getApplicationContext(), getString(R.string.fail_login_access), Toast.LENGTH_SHORT).show();
-        } else {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        final String[] query = {"id=" + id, "pw=" + pw};
-//                        final String serverRes = HttpManager.internalServerAPI("user", query, "", "GET");
-
-//                        final boolean loginResult = !serverRes.equals("[]");
-//                        resultLogin(loginResult, id, pw);
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
-                }
-            }).start();
+                });
+    }
+
+    private void signIn(String id, String pw){
+        if (id.equals("") || pw.equals("")){
+            return;
+        }
+        mAuth.signInWithEmailAndPassword(id, pw)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("LoginActivity", "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("LoginActivity", "signInWithEmail:failure", task.getException());
+                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
+    private void upDateUI(FirebaseUser user) {
+        if (user != null) {
+
         }
     }
+
 }
 
 
