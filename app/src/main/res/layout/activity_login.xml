@@ -1,48 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/login_constraint"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:fillViewport="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <EditText
-        android:id="@+id/login_id"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/banner"
+        android:id="@+id/iv"
+        />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="10sp"
+        android:layout_marginBottom="10sp"
+        android:layout_marginLeft="5sp"
+        android:text="로그인"
+        android:textSize="12pt" />
 
-    <EditText
-        android:id="@+id/login_pw"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_id" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/login_sign_in"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
+            android:text="UserID"
+            android:layout_weight="1"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:hint="가입시 email을 입력해주세요"
+            android:id="@+id/login_id"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/login_btn_sign_in"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_pw" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/login_sign_up"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
+            android:text="Password"
+            android:layout_weight="1"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:hint="6자 이상 영문, 숫자, 기호의 조합"
+            android:id="@+id/login_pw"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_sign_in"
-        android:text="@string/login_btn_sign_up"/>
+        android:orientation="vertical">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/colorMultiGo"
+            android:text="Login"
+            android:id="@+id/login_sign_in"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_margin="10sp"
+            android:background="@color/colorMultiGo"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10sp"
+            android:text="아직 MultiGo 계정이 없습니까?"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="계정생성"
+            android:layout_gravity="center"
+           android:backgroundTint="@color/colorMultiGo"
+            android:id="@+id/login_sign_up"/>
+
+    </LinearLayout>
+
+</LinearLayout>
