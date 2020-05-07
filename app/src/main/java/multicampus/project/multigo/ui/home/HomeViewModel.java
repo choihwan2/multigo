@@ -1,8 +1,6 @@
 package multicampus.project.multigo.ui.home;
 
 import android.graphics.Bitmap;
-import android.util.Log;
-import android.widget.ImageView;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
