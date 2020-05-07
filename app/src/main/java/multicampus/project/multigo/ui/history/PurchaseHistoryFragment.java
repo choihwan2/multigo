@@ -37,20 +37,10 @@ public class PurchaseHistoryFragment extends Fragment {
         final TextView textView = root.findViewById(R.id.text_history);
         btn = root.findViewById(R.id.btn_history);
         historyViewModel
-                .getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+                .getText().observe(getViewLifecycleOwner(), s -> textView.setText(s));
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                historyViewModel
-                        .upText();
-            }
-        });
+        btn.setOnClickListener(v -> historyViewModel
+                .upText());
 
 
         return root;
