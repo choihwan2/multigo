@@ -17,7 +17,7 @@ public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
     private MutableLiveData<Bitmap> qrBitmap;
-    private String userId;
+    private String mUserId,mUserName;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     public HomeViewModel() {
@@ -25,10 +25,10 @@ public class HomeViewModel extends ViewModel {
         qrBitmap = new MutableLiveData<>();
 
         assert user != null;
-        userId = user.getUid();
+        mUserId = user.getUid();
+        mUserName = user.getDisplayName();
 
-        mText.setValue("Hello, Choi" + "님");
-
+        mText.setValue("Hello, " + mUserName + "님");
     }
 
     public LiveData<String> getText() {
@@ -38,7 +38,7 @@ public class HomeViewModel extends ViewModel {
     public LiveData<Bitmap> getQr() {
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(userId, BarcodeFormat.QR_CODE, 200, 200);
+            BitMatrix bitMatrix = multiFormatWriter.encode(mUserId, BarcodeFormat.QR_CODE, 200, 200);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             qrBitmap.setValue(bitmap);
