@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 
 import multicampus.project.multigo.MainActivity;
 import multicampus.project.multigo.R;
@@ -27,9 +26,16 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        initView();
-        initListener();
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null) {
+            setContentView(R.layout.activity_login);
+            initView();
+            initListener();
+        } else {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
     }
 
 
@@ -38,45 +44,30 @@ public class LoginActivity extends AppCompatActivity {
         mSignUpBtn = findViewById(R.id.login_sign_up);
         mInputId = findViewById(R.id.login_id);
         mInputPw = findViewById(R.id.login_pw);
-        mAuth = FirebaseAuth.getInstance();
 
         mInputId.clearFocus();
         mInputPw.clearFocus();
 
     }
 
+    private void checkLogin() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null) {
+
+        }
+    }
+
     private void initListener() {
-        mSignInBtn.setOnClickListener(v -> signIn(mInputId.getText().toString(),mInputPw.getText().toString()));
+        mSignInBtn.setOnClickListener(v -> signIn(mInputId.getText().toString(), mInputPw.getText().toString()));
 
         mSignUpBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(),SignUpActivity.class);
+            Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
             startActivity(intent);
-//                signUp(mInputId.getText().toString(), mInputPw.getText().toString());
         });
     }
 
-    private void signUp(String id, String password) {
-        mAuth.createUserWithEmailAndPassword(id, password)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("LoginActivity", "createUserWithEmail:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName("최환").build();
-                        user.updateProfile(profileUpdates);
-                        upDateUI(user);
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w("LoginActivity", "createUserWithEmail:failure", task.getException());
-                        Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-
-                });
-    }
-
-    private void signIn(String id, String pw){
-        if (id.equals("") || pw.equals("")){
+    private void signIn(String id, String pw) {
+        if (id.equals("") || pw.equals("")) {
             return;
         }
         mAuth.signInWithEmailAndPassword(id, pw)
@@ -90,18 +81,11 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("LoginActivity", "signInWithEmail:failure", task.getException());
-                        Toast.makeText(getApplicationContext(), "빽!",
+                        Toast.makeText(getApplicationContext(), "로그인에 실패하였습니다. 아이디나 비밀번호, 네트워크 환경을 확인해주세요.",
                                 Toast.LENGTH_SHORT).show();
                     }
 
-                    // ...
                 });
-    }
-
-    private void upDateUI(FirebaseUser user) {
-        if (user != null) {
-
-        }
     }
 
 }

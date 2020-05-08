@@ -89,7 +89,7 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:hint="6자 이상 영문, 숫자, 기호의 조합"
-            android:id="@+id/login_pw"/>
+            android:id="@+id/sign_up_password_et"/>
 
     </LinearLayout>
 
@@ -140,12 +140,12 @@
             android:gravity="center_horizontal"/>
 
         <Button
+            android:id="@+id/login_now"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="지금 로그인"
             android:layout_gravity="center"
             android:backgroundTint="@color/colorMultiGo"
-            android:id="@+id/login_now"/>
+            android:text="지금 로그인" />
 
     </LinearLayout>
 
