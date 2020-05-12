@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -40,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
         BottomNavigationView navView = findViewById(R.id.nav_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
+
+//        navView.getMenu().getItem(R.id.navigation_home).setVisible(false);
+
 
         @SuppressLint("HandlerLeak") Handler handler = new Handler() {
             @Override
