@@ -23,11 +23,13 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import multicampus.project.multigo.ui.basket.ItemFragment;
+import multicampus.project.multigo.ui.basket.dummy.DummyContent;
 import multicampus.project.multigo.utils.HttpManager;
 import multicampus.project.multigo.utils.SharedMsg;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
 
     public static ExecutorService executorService = Executors.newCachedThreadPool();
 
@@ -48,9 +50,12 @@ public class MainActivity extends AppCompatActivity {
         };
         MainRunnable mainRunnable = new MainRunnable(handler);
         executorService.execute(mainRunnable);
-
     }
 
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+        Log.d("MainActivity",item.id);
+    }
 }
 
 class MainRunnable implements Runnable {

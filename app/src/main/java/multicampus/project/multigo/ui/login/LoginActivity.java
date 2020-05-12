@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initListener() {
-        mSignInBtn.setOnClickListener(v -> signIn(mInputId.getText().toString(), mInputPw.getText().toString()));
+        mSignInBtn.setOnClickListener(v -> signIn(mInputId.getText().toString().trim(), mInputPw.getText().toString().trim()));
 
         mSignUpBtn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
