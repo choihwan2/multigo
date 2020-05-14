@@ -13,10 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import multicampus.project.multigo.R;
+import multicampus.project.multigo.ui.basket.data.ItemsVO;
 import multicampus.project.multigo.ui.basket.dummy.DummyContent;
-import multicampus.project.multigo.ui.basket.dummy.DummyContent.DummyItem;
-
-import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -107,6 +105,6 @@ public class ItemFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(ItemsVO item);
     }
 }
