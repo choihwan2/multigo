@@ -23,6 +23,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import multicampus.project.multigo.ui.basket.ItemFragment;
+import multicampus.project.multigo.ui.basket.data.ItemsVO;
 import multicampus.project.multigo.ui.basket.dummy.DummyContent;
 import multicampus.project.multigo.utils.HttpManager;
 import multicampus.project.multigo.utils.SharedMsg;
@@ -54,8 +55,8 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-        Log.d("MainActivity",item.id);
+    public void onListFragmentInteraction(ItemsVO item) {
+        Log.d("MainActivity",item.getItem_id());
     }
 
     @Override

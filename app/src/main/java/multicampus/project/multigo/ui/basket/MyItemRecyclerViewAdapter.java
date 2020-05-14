@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import multicampus.project.multigo.R;
@@ -38,8 +39,9 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getItem_id());
-        holder.mContentView.setText(mValues.get(position).getName());
+        holder.mNameView.setText(mValues.get(position).getName());
+        holder.mNumberView.setText(String.valueOf(mValues.get(position).getCnt()));
+        holder.mPriceView.setText(String.valueOf(mValues.get(position).getPrice()));
 
         holder.mView.setOnClickListener(v -> {
             if (null != mListener) {
@@ -57,20 +59,24 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView mNameView;
+        public final TextView mPriceView;
+        public final TextView mNumberView;
+        public final Button mDeleteBtn;
         public ItemsVO mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = view.findViewById(R.id.item_number);
-            mContentView = view.findViewById(R.id.content);
+            mNameView = view.findViewById(R.id.product_name);
+            mNumberView = view.findViewById(R.id.product_count);
+            mPriceView = view.findViewById(R.id.product_price);
+            mDeleteBtn = view.findViewById(R.id.product_cancel_btn);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mNumberView.getText() + "'";
         }
     }
 }

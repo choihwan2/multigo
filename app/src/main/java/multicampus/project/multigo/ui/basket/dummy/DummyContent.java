@@ -25,7 +25,7 @@ public class DummyContent {
      */
     public static final Map<String, ItemsVO> ITEM_MAP = new HashMap<String, ItemsVO>();
 
-    private static final int COUNT = 25;
+    private static final int COUNT = 10;
 
     static {
         // Add some sample items.
@@ -40,7 +40,7 @@ public class DummyContent {
     }
 
     private static ItemsVO createDummyItem(int position) {
-        return new ItemsVO("ITEM00" + position, "Item " + position, 1000);
+        return new ItemsVO("ITEM00" + position, "Item " + position, 1000,1);
     }
 
 
