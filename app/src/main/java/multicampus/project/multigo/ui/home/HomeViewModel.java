@@ -28,10 +28,10 @@ public class HomeViewModel extends ViewModel {
         mUserId = user.getUid();
         mUserName = user.getDisplayName();
 
-        mText.setValue("Hello, " + mUserName + "님");
     }
 
     public LiveData<String> getText() {
+        mText.setValue("Hello, " + mUserName + "님");
         return mText;
     }
 

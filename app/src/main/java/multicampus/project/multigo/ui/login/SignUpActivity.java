@@ -47,7 +47,6 @@ public class SignUpActivity extends AppCompatActivity {
     public void initListener(){
         mAlreadySignUpBtn.setOnClickListener(v ->{
             Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
@@ -81,8 +80,8 @@ public class SignUpActivity extends AppCompatActivity {
                         user.updateProfile(profileUpdates);
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
+                        finish();
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("LoginActivity", "createUserWithEmail:failure", task.getException());

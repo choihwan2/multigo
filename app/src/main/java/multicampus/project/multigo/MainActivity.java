@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
 
-//        navView.getMenu().getItem(R.id.navigation_home).setVisible(false);
 
 
         @SuppressLint("HandlerLeak") Handler handler = new Handler() {
@@ -57,6 +56,13 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
         Log.d("MainActivity",item.id);
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        Log.d("MainActivity","onBackPressed 호출");
+        finish();
     }
 }
 

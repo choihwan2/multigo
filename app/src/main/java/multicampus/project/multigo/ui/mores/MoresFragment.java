@@ -12,7 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Objects;
 
 import multicampus.project.multigo.R;
 import multicampus.project.multigo.ui.login.LoginActivity;
@@ -31,8 +32,9 @@ public class MoresFragment extends Fragment {
         logout.setOnClickListener(v ->{
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(getActivity(), LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+            Objects.requireNonNull(getActivity()).finish();
         });
 
 
