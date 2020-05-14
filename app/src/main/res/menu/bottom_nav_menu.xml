@@ -4,7 +4,14 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_key" />
+        android:title="@string/title_key"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/navigation_basket"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="장바구니"
+        android:visible="false" />
 
     <item
         android:id="@+id/navigation_dashboard"

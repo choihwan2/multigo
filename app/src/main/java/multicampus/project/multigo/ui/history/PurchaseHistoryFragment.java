@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import multicampus.project.multigo.R;
+import multicampus.project.multigo.utils.SharedMsg;
 
 public class PurchaseHistoryFragment extends Fragment {
 
@@ -35,10 +36,13 @@ public class PurchaseHistoryFragment extends Fragment {
         final TextView textView = root.findViewById(R.id.text_history);
         btn = root.findViewById(R.id.btn_history);
         historyViewModel
-                .getText().observe(getViewLifecycleOwner(), s -> textView.setText(s));
+                .getText().observe(getViewLifecycleOwner(), textView::setText);
 
-        btn.setOnClickListener(v -> historyViewModel
-                .upText());
+        btn.setOnClickListener(v -> {
+            historyViewModel
+                    .upText();
+            SharedMsg.getInstance().addMsg("sibal");
+        });
 
 
         return root;

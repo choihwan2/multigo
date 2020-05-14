@@ -1,5 +1,6 @@
 package multicampus.project.multigo.ui.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,7 +35,9 @@ public class LoginActivity extends AppCompatActivity {
             initListener();
         } else {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -50,18 +53,13 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void checkLogin() {
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user == null) {
-
-        }
-    }
 
     private void initListener() {
-        mSignInBtn.setOnClickListener(v -> signIn(mInputId.getText().toString(), mInputPw.getText().toString()));
+        mSignInBtn.setOnClickListener(v -> signIn(mInputId.getText().toString().trim(), mInputPw.getText().toString().trim()));
 
         mSignUpBtn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });
     }
@@ -76,8 +74,10 @@ public class LoginActivity extends AppCompatActivity {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("LoginActivity", "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
+                        finish();
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("LoginActivity", "signInWithEmail:failure", task.getException());
