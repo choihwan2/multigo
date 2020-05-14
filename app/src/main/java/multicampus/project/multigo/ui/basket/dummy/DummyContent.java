@@ -1,11 +1,16 @@
 package multicampus.project.multigo.ui.basket.dummy;
 
+import android.util.Log;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import multicampus.project.multigo.ui.basket.data.ItemsVO;
+import multicampus.project.multigo.ui.basket.data.LaisVO;
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -25,12 +30,18 @@ public class DummyContent {
      */
     public static final Map<String, ItemsVO> ITEM_MAP = new HashMap<String, ItemsVO>();
 
-    private static final int COUNT = 10;
+    public static final List<LaisVO> LIST_ITEMS = new ArrayList<>();
+
+    private static final int COUNT = 5;
 
     static {
         // Add some sample items.
         for (int i = 1; i <= COUNT; i++) {
             addItem(createDummyItem(i));
+            addList(createDummyListItem(i));
+        }
+        for (ItemsVO item : ITEMS) {
+            Log.d("DUMMY", item.getItem_id());
         }
     }
 
@@ -39,8 +50,36 @@ public class DummyContent {
         ITEM_MAP.put(item.getItem_id(), item);
     }
 
+    private static void addList(LaisVO item) {
+        LIST_ITEMS.add(item);
+    }
+
     private static ItemsVO createDummyItem(int position) {
-        return new ItemsVO("ITEM00" + position, "Item " + position, 1000,1);
+        return new ItemsVO("ITEM00" + position, "Item " + position, 1000, 1);
+    }
+
+    private static LaisVO createDummyListItem(int position) {
+        return new LaisVO(0, ITEMS.get(0).getItem_id(), ITEMS.get(0).getCnt());
+    }
+
+    public static int getSum() {
+        int sum = 0;
+        for (ItemsVO item : ITEMS) {
+            sum += item.getPrice();
+        }
+        return sum;
+    }
+
+    public static String getJsonItems() {
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonString = "";
+        try {
+            jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(LIST_ITEMS);
+            Log.d("DummyContent",jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return jsonString;
     }
 
 

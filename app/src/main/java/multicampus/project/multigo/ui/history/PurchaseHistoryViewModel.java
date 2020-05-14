@@ -25,9 +25,7 @@ public class PurchaseHistoryViewModel extends ViewModel {
     public void upText(){
         for(int i = 0; i< 5; i++){
             cntNum++;
-            Log.i("PurchaseHistory","upText() 호출");
-            Log.i("PurchaseHistory",Thread.currentThread().getName());
-            mText.postValue("This is dashboard framgent " + cntNum);
+            mText.postValue("This is dashboard framgent " + cntNum); // data 변환시 사용
         }
     }
 }

@@ -4,7 +4,13 @@ public class LaisVO {
 	private int list_id;
 	private String item_id;
 	private int cnt;
-	
+
+	public LaisVO(int list_id, String item_id, int cnt) {
+		this.list_id = list_id;
+		this.item_id = item_id;
+		this.cnt = cnt;
+	}
+
 	public int getList_id() {
 		return list_id;
 	}

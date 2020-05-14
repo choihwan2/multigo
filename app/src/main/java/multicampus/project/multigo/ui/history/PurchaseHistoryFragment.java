@@ -41,7 +41,7 @@ public class PurchaseHistoryFragment extends Fragment {
         btn.setOnClickListener(v -> {
             historyViewModel
                     .upText();
-            SharedMsg.getInstance().addMsg("sibal");
+            SharedMsg.getInstance().addMsg("haha");
         });
 
 

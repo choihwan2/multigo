@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import multicampus.project.multigo.R;
 import multicampus.project.multigo.ui.basket.data.ItemsVO;
 import multicampus.project.multigo.ui.basket.dummy.DummyContent;
+import multicampus.project.multigo.utils.SharedMsg;
 
 /**
  * A fragment representing a list of Items.
@@ -59,19 +61,17 @@ public class ItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_item_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_basket, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
-        }
+        RecyclerView recyclerView = view.findViewById(R.id.basket_list);
+        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),mColumnCount));
+        recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+
+        Button sendBtn = view.findViewById(R.id.send_basket_btn);
+        sendBtn.setOnClickListener(v -> {
+            SharedMsg.getInstance().addMsg("@@AddList " + DummyContent.getSum());
+            SharedMsg.getInstance().addMsg("@@AddLais" + DummyContent.getJsonItems());
+        });
         return view;
     }
 
