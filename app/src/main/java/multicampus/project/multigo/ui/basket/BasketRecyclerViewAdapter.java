@@ -19,12 +19,12 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyBasketRecyclerViewAdapter extends RecyclerView.Adapter<MyBasketRecyclerViewAdapter.ViewHolder> {
+public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecyclerViewAdapter.ViewHolder> {
 
     private final List<ItemsVO> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyBasketRecyclerViewAdapter(List<ItemsVO> items, OnListFragmentInteractionListener listener) {
+    public BasketRecyclerViewAdapter(List<ItemsVO> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -32,7 +32,7 @@ public class MyBasketRecyclerViewAdapter extends RecyclerView.Adapter<MyBasketRe
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_item, parent, false);
+                .inflate(R.layout.item_basket, parent, false);
         return new ViewHolder(view);
     }
 

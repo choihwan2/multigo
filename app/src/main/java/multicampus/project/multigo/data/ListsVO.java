@@ -1,4 +1,4 @@
-package multicampus.project.multigo.ui.basket.data;
+package multicampus.project.multigo.data;
 
 public class ListsVO {
 	private int list_id;

@@ -1,7 +1,5 @@
 package multicampus.project.multigo.ui.basket.dummy;
 
-import android.util.Log;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
@@ -9,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import multicampus.project.multigo.ui.basket.data.ItemsVO;
-import multicampus.project.multigo.ui.basket.data.LaisVO;
+import multicampus.project.multigo.data.ItemsVO;
+import multicampus.project.multigo.data.LaisVO;
 
 /**
  * Helper class for providing sample content for user interfaces created by

@@ -13,8 +13,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".ui.basket.ItemFragment"
-        tools:listitem="@layout/fragment_item"
+        tools:context=".ui.basket.BasketFragment"
+        tools:listitem="@layout/item_basket"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHeight_percent="0.8"/>

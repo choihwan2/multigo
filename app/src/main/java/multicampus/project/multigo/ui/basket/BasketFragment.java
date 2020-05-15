@@ -14,6 +14,7 @@ import android.widget.Button;
 
 import multicampus.project.multigo.R;
 import multicampus.project.multigo.data.ItemsVO;
+import multicampus.project.multigo.data.ListsVO;
 import multicampus.project.multigo.ui.basket.dummy.DummyContent;
 import multicampus.project.multigo.utils.SharedMsg;
 
@@ -23,7 +24,7 @@ import multicampus.project.multigo.utils.SharedMsg;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class ItemFragment extends Fragment {
+public class BasketFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -31,13 +32,13 @@ public class ItemFragment extends Fragment {
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
-    public ItemFragment() {
+    public BasketFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ItemFragment newInstance(int columnCount) {
-        ItemFragment fragment = new ItemFragment();
+    public static BasketFragment newInstance(int columnCount) {
+        BasketFragment fragment = new BasketFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -60,7 +61,7 @@ public class ItemFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.basket_list);
         recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),mColumnCount));
-        recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+        recyclerView.setAdapter(new BasketRecyclerViewAdapter(DummyContent.ITEMS, mListener));
 
         Button sendBtn = view.findViewById(R.id.send_basket_btn);
         sendBtn.setOnClickListener(v -> {
