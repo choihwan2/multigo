@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import multicampus.project.multigo.R;
-import multicampus.project.multigo.ui.basket.ItemFragment.OnListFragmentInteractionListener;
-import multicampus.project.multigo.ui.basket.data.ItemsVO;
+import multicampus.project.multigo.ui.basket.BasketFragment.OnListFragmentInteractionListener;
+import multicampus.project.multigo.data.ItemsVO;
 
 import java.util.List;
 
@@ -19,12 +19,12 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
+public class MyBasketRecyclerViewAdapter extends RecyclerView.Adapter<MyBasketRecyclerViewAdapter.ViewHolder> {
 
     private final List<ItemsVO> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyItemRecyclerViewAdapter(List<ItemsVO> items, OnListFragmentInteractionListener listener) {
+    public MyBasketRecyclerViewAdapter(List<ItemsVO> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
