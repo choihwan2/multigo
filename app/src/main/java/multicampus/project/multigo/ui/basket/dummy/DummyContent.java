@@ -30,7 +30,7 @@ public class DummyContent {
      */
     public static final Map<String, ItemsVO> ITEM_MAP = new HashMap<String, ItemsVO>();
 
-    public static final List<LaisVO> LIST_ITEMS = new ArrayList<>();
+    public static final List<LaisVO> LAIS_ITEMS = new ArrayList<>();
 
     private static final int COUNT = 5;
 
@@ -40,9 +40,6 @@ public class DummyContent {
             addItem(createDummyItem(i));
             addList(createDummyListItem(i));
         }
-        for (ItemsVO item : ITEMS) {
-            Log.d("DUMMY", item.getItem_id());
-        }
     }
 
     private static void addItem(ItemsVO item) {
@@ -51,7 +48,7 @@ public class DummyContent {
     }
 
     private static void addList(LaisVO item) {
-        LIST_ITEMS.add(item);
+        LAIS_ITEMS.add(item);
     }
 
     private static ItemsVO createDummyItem(int position) {
@@ -59,7 +56,7 @@ public class DummyContent {
     }
 
     private static LaisVO createDummyListItem(int position) {
-        return new LaisVO(0, ITEMS.get(0).getItem_id(), ITEMS.get(0).getCnt());
+        return new LaisVO(0, ITEMS.get(position - 1).getItem_id(), ITEMS.get(position - 1).getCnt());
     }
 
     public static int getSum() {
@@ -74,8 +71,8 @@ public class DummyContent {
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = "";
         try {
-            jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(LIST_ITEMS);
-            Log.d("DummyContent",jsonString);
+            jsonString = mapper.writeValueAsString(LAIS_ITEMS);
+//            Log.d("DummyContent",jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }

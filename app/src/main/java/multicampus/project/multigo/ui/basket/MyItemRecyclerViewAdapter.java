@@ -58,14 +58,14 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mNameView;
-        public final TextView mPriceView;
-        public final TextView mNumberView;
-        public final Button mDeleteBtn;
-        public ItemsVO mItem;
+        final View mView;
+        final TextView mNameView;
+        final TextView mPriceView;
+        final TextView mNumberView;
+        final Button mDeleteBtn;
+        ItemsVO mItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
             mNameView = view.findViewById(R.id.product_name);

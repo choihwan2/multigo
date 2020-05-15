@@ -7,6 +7,7 @@ import android.os.Message;
 import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,7 +47,15 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
             @Override
             public void handleMessage(@NonNull Message msg) {
                 Bundle bundle = msg.getData();
-                String lightStatus = bundle.getString("data");
+                String revString = bundle.getString("data");
+                Log.d("MainActivity","handleMessage 들어옴");
+                if (revString.equals("@@Enter")){
+                    Log.d("MainActivity","Enter 들어옴");
+                    navController.navigate(R.id.action_navigation_home_to_navigation_basket);
+                }
+                if (revString.equals("@@Exit")){
+                    Log.d("MainActivity","Exit 들어옴");
+                }
             }
         };
         MainRunnable mainRunnable = new MainRunnable(handler);
@@ -63,6 +72,12 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 //        super.onBackPressed();
         Log.d("MainActivity","onBackPressed 호출");
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        SharedMsg.getInstance().addMsg("@@Terminate");
+        super.onDestroy();
     }
 }
 
@@ -86,26 +101,33 @@ class MainRunnable implements Runnable {
             pw = new PrintWriter(s.getOutputStream());
             Runnable revRunnable = () -> {
                 try {
+
+                    Log.d("MainActivity","try 들어옴");
                     String revString = "";
                     while ((revString = br.readLine()) != null) {
-
+                        Log.d("MainActivity","revString 들어옴");
                         Message msg = new Message();
                         Bundle bundle = new Bundle();
                         bundle.putString("data", revString);
                         msg.setData(bundle);
+
+                        Log.d("MainActivity", revString + " 들어옴");
                         handler.sendMessage(msg);
                     }
-
+                    Log.d("MainActivity","while 끝남 들어옴");
+                    br.close();
+                    pw.close();
+                    s.close();
                 } catch (IOException e) {
                     Log.d("MainRunnable","서버와 연결이 실패했습니다.");
                     e.printStackTrace();
                 }
             };
             MainActivity.executorService.execute(revRunnable);
-
+            // 처음 실행할때 사용자 ID 를 서버에 전송해 주어야한다.
+            SharedMsg.getInstance().addMsg("@@SetID " + FirebaseAuth.getInstance().getCurrentUser().getUid());
             while (true) {
                 String msg = sharedObj.popMsg();
-                Log.i("MainRunnable", msg);
                 pw.println(msg);
                 pw.flush();
             }

@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import multicampus.project.multigo.R;
 import multicampus.project.multigo.ui.basket.data.ItemsVO;
 import multicampus.project.multigo.ui.basket.dummy.DummyContent;
@@ -32,10 +34,6 @@ public class ItemFragment extends Fragment {
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public ItemFragment() {
     }
 
@@ -70,7 +68,7 @@ public class ItemFragment extends Fragment {
         Button sendBtn = view.findViewById(R.id.send_basket_btn);
         sendBtn.setOnClickListener(v -> {
             SharedMsg.getInstance().addMsg("@@AddList " + DummyContent.getSum());
-            SharedMsg.getInstance().addMsg("@@AddLais" + DummyContent.getJsonItems());
+            SharedMsg.getInstance().addMsg("@@AddLais " + DummyContent.getJsonItems());
         });
         return view;
     }
@@ -93,15 +91,9 @@ public class ItemFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+    /*
+    아래의 인터페이스를 엑티비티에서 상속받아야만 이 리사이클러 뷰를 사용할 수 있게 만들어놨따.
+    그 이유는 뷰에서 동작받는 것을 처리하려고
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
