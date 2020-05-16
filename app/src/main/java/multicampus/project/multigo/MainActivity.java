@@ -7,28 +7,28 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
-import androidx.navigation.NavHost;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import multicampus.project.multigo.data.ItemsVO;
+import multicampus.project.multigo.data.ListsVO;
 import multicampus.project.multigo.ui.basket.BasketFragment;
-import multicampus.project.multigo.ui.history.PurchaseHistoryFragment;
+import multicampus.project.multigo.utils.AppHelper;
 import multicampus.project.multigo.utils.HttpManager;
 import multicampus.project.multigo.utils.SharedMsg;
 
@@ -61,11 +61,6 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
                 if (revString.equals("@@Exit")){
                     Toast.makeText(getApplicationContext(),"매장에서 퇴장했습니다.",Toast.LENGTH_SHORT).show();
                     Log.d("MainActivity","Exit 들어옴");
-                }
-                if (revString.startsWith("@@GetAllList ")){
-                    /*
-                    데이터를 요청한 후에 Fragment 와 Activity 가 둘다 가지고 있는 ViewModel 을 활용해서 데이터를 주고받자.
-                     */
                 }
             }
         };
@@ -114,6 +109,14 @@ class MainRunnable implements Runnable {
                     String revString = "";
                     while ((revString = br.readLine()) != null) {
                         Log.d("MainActivity",revString + "메시지 읽음");
+
+                        if (revString.startsWith("@@GetAllList ")){
+                            String jsonString = revString.replace("@@GetAllList ", "");
+                            List<ListsVO> list = AppHelper.initListData(jsonString);
+                            MainData mainData = MainData.getInstance();
+                            mainData.setmLists(list);
+                            continue;
+                        }
                         Message msg = new Message();
                         Bundle bundle = new Bundle();
                         bundle.putString("data", revString);
@@ -132,8 +135,9 @@ class MainRunnable implements Runnable {
             };
             MainActivity.executorService.execute(revRunnable);
             // 처음 실행할때 사용자 ID 를 서버에 전송해 주어야한다.
+            // 그 후 장바구니 받아옴.
             SharedMsg.getInstance().addMsg("@@SetID " + FirebaseAuth.getInstance().getCurrentUser().getUid());
-
+            SharedMsg.getInstance().addMsg("@@GetAllList");
             while (true) {
                 String msg = sharedObj.popMsg();
                 Log.d("MainActivity", msg + "를 받았따!");

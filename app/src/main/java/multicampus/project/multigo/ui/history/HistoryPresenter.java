@@ -3,6 +3,7 @@ package multicampus.project.multigo.ui.history;
 import java.util.ArrayList;
 import java.util.List;
 
+import multicampus.project.multigo.MainData;
 import multicampus.project.multigo.data.ListsVO;
 
 public class HistoryPresenter {
@@ -12,7 +13,7 @@ public class HistoryPresenter {
     }
 
     public void initData() {
-        List<ListsVO> data = new ArrayList<>();
+        List<ListsVO> data = MainData.getInstance().getmLists();
         view.addData(data);
     }
 

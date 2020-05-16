@@ -46,15 +46,4 @@ public class PurchaseHistoryFragment extends Fragment implements HistoryPresente
         }
         adapter.notifyDataSetChanged();
     }
-
-    public void initData(String revString) {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            List<ListsVO> list = mapper.readValue(revString, new TypeReference<ArrayList<ListsVO>>() {
-            });
-            addData(list);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
