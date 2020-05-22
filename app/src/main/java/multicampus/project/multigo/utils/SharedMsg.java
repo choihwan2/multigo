@@ -5,6 +5,9 @@ import java.util.Queue;
 
 public class SharedMsg {
 
+    /*
+        NOTE 안드로이드 앱 내의 스레드들이 사용하는 공유 객
+     */
     private Queue<String> msg_q = new LinkedList<String>();
     private final static Object MONITER = new Object();
 
@@ -26,7 +29,6 @@ public class SharedMsg {
                 try {
                     MONITER.wait();
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }

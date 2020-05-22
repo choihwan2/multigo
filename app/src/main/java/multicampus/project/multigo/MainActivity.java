@@ -14,22 +14,13 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import multicampus.project.multigo.data.ItemsVO;
-import multicampus.project.multigo.data.ListsVO;
 import multicampus.project.multigo.ui.basket.BasketFragment;
 import multicampus.project.multigo.utils.AppHelper;
-import multicampus.project.multigo.utils.HttpManager;
 import multicampus.project.multigo.utils.SharedMsg;
 
 
@@ -44,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
         BottomNavigationView navView = findViewById(R.id.nav_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
+        Log.d("MainActivity","onCreate 생성됨");
 
 
 
@@ -53,12 +45,12 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
                 Bundle bundle = msg.getData();
                 String revString = bundle.getString("data");
                 assert revString != null;
-                if (revString.equals("@@Enter")){
+                if (revString.equals(AppHelper.ENTER)){
                     Log.d("MainActivity","Enter 들어옴");
                     Toast.makeText(getApplicationContext(),"매장에 입장하였습니다.",Toast.LENGTH_SHORT).show();
                     navController.navigate(R.id.action_navigation_home_to_navigation_basket);
                 }
-                if (revString.equals("@@Exit")){
+                if (revString.equals(AppHelper.EXIT)){
                     Toast.makeText(getApplicationContext(),"매장에서 퇴장했습니다.",Toast.LENGTH_SHORT).show();
                     Log.d("MainActivity","Exit 들어옴");
                 }
@@ -75,79 +67,12 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
 
     @Override
     public void onBackPressed() {
+        SharedMsg.getInstance().addMsg(AppHelper.TERMINATE);
         finish();
     }
 
     @Override
     protected void onDestroy() {
-        SharedMsg.getInstance().addMsg("@@Terminate");
         super.onDestroy();
-    }
-}
-
-class MainRunnable implements Runnable {
-
-    private BufferedReader br;
-    private PrintWriter pw;
-    private SharedMsg sharedObj = SharedMsg.getInstance();
-    private Handler handler;
-
-    MainRunnable(Handler handler) {
-        this.handler = handler;
-    }
-
-    @Override
-    public void run() {
-        try {
-            Socket s = new Socket(HttpManager.host, HttpManager.PORT);
-            Log.d("MainActivity", "서버와 연결 성공!");
-            br = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            pw = new PrintWriter(s.getOutputStream());
-            Runnable revRunnable = () -> {
-                try {
-
-                    String revString = "";
-                    while ((revString = br.readLine()) != null) {
-                        Log.d("MainActivity",revString + "메시지 읽음");
-
-                        if (revString.startsWith("@@GetAllList ")){
-                            String jsonString = revString.replace("@@GetAllList ", "");
-                            List<ListsVO> list = AppHelper.initListData(jsonString);
-                            MainData mainData = MainData.getInstance();
-                            mainData.setmLists(list);
-                            continue;
-                        }
-                        Message msg = new Message();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("data", revString);
-                        msg.setData(bundle);
-
-                        handler.sendMessage(msg);
-                    }
-                    Log.d("MainActivity","while 끝남 들어옴");
-                    br.close();
-                    pw.close();
-                    s.close();
-                } catch (IOException e) {
-                    Log.d("MainActivity","서버와 연결이 실패했습니다.");
-                    e.printStackTrace();
-                }
-            };
-            MainActivity.executorService.execute(revRunnable);
-            // 처음 실행할때 사용자 ID 를 서버에 전송해 주어야한다.
-            // 그 후 장바구니 받아옴.
-            SharedMsg.getInstance().addMsg("@@SetID " + FirebaseAuth.getInstance().getCurrentUser().getUid());
-            SharedMsg.getInstance().addMsg("@@GetAllList");
-            while (true) {
-                String msg = sharedObj.popMsg();
-                Log.d("MainActivity", msg + "를 받았따!");
-                pw.println(msg);
-                pw.flush();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 }

@@ -3,7 +3,6 @@ package multicampus.project.multigo;
 import java.util.List;
 
 import multicampus.project.multigo.data.ListsVO;
-import multicampus.project.multigo.utils.HttpManager;
 
 public class MainData {
 
@@ -21,9 +20,6 @@ public class MainData {
 
     private List<ListsVO> mLists;
 
-    public MainData(List<ListsVO> lists) {
-        this.mLists = lists;
-    }
 
     public void setmLists(List<ListsVO> mLists) {
         this.mLists = mLists;

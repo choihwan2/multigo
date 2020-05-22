@@ -3,8 +3,13 @@ package multicampus.project.multigo.utils;
 public class HttpManager {
 
 
-    public static final String host = "70.12.229.25";
+    /*
+        NOTE : Main Server IP and Port
+     */
+    public static final String HOST = "70.12.60.104";
     public static final int PORT = 6020;
+
+
 
     private HttpManager(){
 

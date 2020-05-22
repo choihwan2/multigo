@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.List;
 
 import multicampus.project.multigo.R;
 import multicampus.project.multigo.data.ListsVO;
+import multicampus.project.multigo.utils.AppHelper;
 import multicampus.project.multigo.utils.SharedMsg;
 
 public class PurchaseHistoryFragment extends Fragment implements HistoryPresenter.View {
@@ -33,7 +35,7 @@ public class PurchaseHistoryFragment extends Fragment implements HistoryPresente
         RecyclerView historyRv = root.findViewById(R.id.history_list);
         adapter = new HistoryRecyclerViewAdapter();
         historyRv.setAdapter(adapter);
-        SharedMsg.getInstance().addMsg("@@GetAllList");
+        SharedMsg.getInstance().addMsg(AppHelper.GET_LIST + FirebaseAuth.getInstance().getCurrentUser().getUid());
         HistoryPresenter presenter = new HistoryPresenter(this);
         presenter.initData();
         return root;
