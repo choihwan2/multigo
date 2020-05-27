@@ -68,11 +68,15 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
     @Override
     public void onBackPressed() {
         SharedMsg.getInstance().addMsg(AppHelper.TERMINATE);
+        Log.d("MainActivity", "onBackPressed 호출");
         finish();
     }
 
     @Override
     protected void onDestroy() {
+        //SharedMsg.getInstance().addMsg(AppHelper.TERMINATE);
+
+        //Log.d("MainActivity", "onDestory 호출");
         super.onDestroy();
     }
 }

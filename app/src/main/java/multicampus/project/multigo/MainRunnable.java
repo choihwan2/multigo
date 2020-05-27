@@ -37,12 +37,18 @@ public class MainRunnable implements Runnable {
             Log.d("MainRunnable", "서버와 연결 성공!");
             br = new BufferedReader(new InputStreamReader(s.getInputStream()));
             pw = new PrintWriter(s.getOutputStream());
+            if(pw != null){
+                Log.d("MainRunnable","pw가 null!이 아님." + pw.toString());
+            }else{
+                Log.d("MainRunnable","pw가 null!#$!$!#$");
+            }
 
             /*
                 NOTE 서버와의 연결을 성공하면 그 후에 소켓통신으로 들어오는 응답을 처리하기 위한 Thread 를 생성해 실행한다.
              */
             Runnable revRunnable = () -> {
                 try {
+                    Log.d("revRunnable","revRunnable이 실행 되었습니다." +  Thread.currentThread().getName());
                     String revString = "";
                     while ((revString = br.readLine()) != null) {
                         Log.d("revRunnable",revString + "메시지 읽음");
@@ -52,6 +58,18 @@ public class MainRunnable implements Runnable {
                             List<ListsVO> list = AppHelper.initListData(jsonString);
                             MainData.getInstance().setmLists(list);
                             continue;
+                        }
+                        if(revString.startsWith(AppHelper.TERMINATE)){
+                            if(br != null)
+                                br.close();
+                            if(pw != null) {
+                                Log.d("revRunnable","pw를 null 로 만듬!" + pw.toString());
+                                pw.close();
+                                pw = null;
+                            }
+
+                            s.close();
+                            break;
                         }
 
                         if(revString.startsWith(AppHelper.LOGIN)){
@@ -66,11 +84,6 @@ public class MainRunnable implements Runnable {
                         handler.sendMessage(msg);
                     }
                     Log.d("MainRunnable","while 끝남 들어옴");
-                    if(br !=null)
-                    br.close();
-                    if(pw != null)
-                    pw.close();
-                    s.close();
                 } catch (IOException e) {
                     Log.d("MainRunnable","서버와 연결이 실패했습니다.");
                     e.printStackTrace();
@@ -85,10 +98,17 @@ public class MainRunnable implements Runnable {
             while (true) {
                 String msg = sharedObj.popMsg();
                 Log.d("MainRunnable", msg + "를 보냈다!!");
+                Log.d("MainRunnable","Pw 가 null이에요.." + pw.toString());
+                if(pw != null) {
+                    Log.d("MainRunnable", "Pw 가 살아있어요" + pw.toString());
+                } else {
+                    Log.d("MainRunnable","Pw 가 null이에요.." + pw.toString());
+                    break;
+                }
                 pw.println(msg);
-                pw.flush();
+                pw.flush();  // pw 는 exception 을 발생시키지 않는다.
             }
-        } catch (IOException e) {
+        } catch (Exception e) { // 가장 위에 있는 try 의 catch 위의 pw가 아니다.
             e.printStackTrace();
         }
     }

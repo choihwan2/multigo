@@ -1,6 +1,5 @@
 package multicampus.project.multigo.ui.history;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import multicampus.project.multigo.MainData;
