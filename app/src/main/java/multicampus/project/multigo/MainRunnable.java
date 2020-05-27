@@ -37,11 +37,6 @@ public class MainRunnable implements Runnable {
             Log.d("MainRunnable", "서버와 연결 성공!");
             br = new BufferedReader(new InputStreamReader(s.getInputStream()));
             pw = new PrintWriter(s.getOutputStream());
-            if(pw != null){
-                Log.d("MainRunnable","pw가 null!이 아님." + pw.toString());
-            }else{
-                Log.d("MainRunnable","pw가 null!#$!$!#$");
-            }
 
             /*
                 NOTE 서버와의 연결을 성공하면 그 후에 소켓통신으로 들어오는 응답을 처리하기 위한 Thread 를 생성해 실행한다.
@@ -60,15 +55,13 @@ public class MainRunnable implements Runnable {
                             continue;
                         }
                         if(revString.startsWith(AppHelper.TERMINATE)){
-                            SharedMsg.getInstance().addMsg("die");
+                            SharedMsg.getInstance().addMsg(AppHelper.THREAD_STOP);
                             if(br != null)
                                 br.close();
                             if(pw != null) {
                                 Log.d("revRunnable","pw를 null 로 만듬!" + pw.toString());
                                 pw.close();
-                                pw = null;
                             }
-
                             s.close();
                             break;
                         }
@@ -98,7 +91,7 @@ public class MainRunnable implements Runnable {
             SharedMsg.getInstance().addMsg(AppHelper.LOGIN + FirebaseAuth.getInstance().getCurrentUser().getUid());
             while (true) {
                 String msg = sharedObj.popMsg();
-                if(msg.equals("die")){
+                if(msg.equals(AppHelper.THREAD_STOP)){
                     Log.d("MainRunnable","죽음이 찾아왔습니다.");
                     break;
                 }

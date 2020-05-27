@@ -23,6 +23,7 @@ public class AppHelper {
     public static final String ADD_LIST = "@@AddList ";
     public static final String ADD_DETAIL = "@@AddLais ";
     public static final String TERMINATE = "@@Terminate";
+    public static final String THREAD_STOP = "@@STOP";
 
     /*
      * NOTE 구매 리스트를 받아오는 함수

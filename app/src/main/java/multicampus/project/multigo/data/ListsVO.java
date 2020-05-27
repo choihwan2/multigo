@@ -1,5 +1,8 @@
 package multicampus.project.multigo.data;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ListsVO {
 	private int list_id;
 	private String purchase_date;
@@ -13,6 +16,14 @@ public class ListsVO {
 		this.list_id = list_id;
 	}
 	public String getPurchase_date() {
+		try {
+			Date nowDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(purchase_date);
+			SimpleDateFormat f = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+			purchase_date = f.format(nowDate);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
 		return purchase_date;
 	}
 	public void setPurchase_date(String purchase_date) {
