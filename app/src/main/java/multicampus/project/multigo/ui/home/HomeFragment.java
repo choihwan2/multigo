@@ -23,6 +23,7 @@ import com.google.android.material.internal.NavigationMenuView;
 import com.google.android.material.navigation.NavigationView;
 
 import multicampus.project.multigo.R;
+import multicampus.project.multigo.utils.AppHelper;
 
 public class HomeFragment extends Fragment {
 
@@ -40,9 +41,14 @@ public class HomeFragment extends Fragment {
 
         homeViewModel.getQr().observe(getViewLifecycleOwner(), qrView::setImageBitmap);
 
-        btn = root.findViewById(R.id.goBasket_home_btn);
-        btn.setOnClickListener(v -> {
 
+        btn = root.findViewById(R.id.goBasket_home_btn);
+        if(AppHelper.isEntered){
+            btn.setVisibility(View.VISIBLE);
+        }else{
+            btn.setVisibility(View.INVISIBLE);
+        }
+        btn.setOnClickListener(v -> {
 //            btmNav.getMenu().getItem(R.id.navigation_home).setVisible(false);
 //            btmNav.getMenu().getItem(R.id.navigation_basket).setVisible(true);
             Navigation.findNavController(root).navigate(R.id.action_navigation_home_to_navigation_basket);
