@@ -5,46 +5,47 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import multicampus.project.multigo.R;
+import multicampus.project.multigo.data.ListsVO;
+import multicampus.project.multigo.utils.AppHelper;
 import multicampus.project.multigo.utils.SharedMsg;
 
-public class PurchaseHistoryFragment extends Fragment {
+public class PurchaseHistoryFragment extends Fragment implements HistoryPresenter.View {
 
-    private PurchaseHistoryViewModel historyViewModel;
-    private Button btn;
 
-    @Override
-    public void onDestroy() {
-        Log.i("Fragment", "onDestroy()호출");
-        super.onDestroy();
-    }
-
+    HistoryRecyclerViewAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        historyViewModel
-                =
-                ViewModelProviders.of(this).get(PurchaseHistoryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_purchase_history, container, false);
-        final TextView textView = root.findViewById(R.id.text_history);
-        btn = root.findViewById(R.id.btn_history);
-        historyViewModel
-                .getText().observe(getViewLifecycleOwner(), textView::setText);
-
-        btn.setOnClickListener(v -> {
-            historyViewModel
-                    .upText();
-            SharedMsg.getInstance().addMsg("sibal");
-        });
-
-
+        RecyclerView historyRv = root.findViewById(R.id.history_list);
+        adapter = new HistoryRecyclerViewAdapter();
+        historyRv.setAdapter(adapter);
+        SharedMsg.getInstance().addMsg(AppHelper.GET_LIST + FirebaseAuth.getInstance().getCurrentUser().getUid());
+        HistoryPresenter presenter = new HistoryPresenter(this);
+        presenter.initData();
         return root;
+    }
+
+    @Override
+    public void addData(List<ListsVO> data) {
+        for (ListsVO item : data) {
+            adapter.addItem(item);
+        }
+        adapter.notifyDataSetChanged();
     }
 }

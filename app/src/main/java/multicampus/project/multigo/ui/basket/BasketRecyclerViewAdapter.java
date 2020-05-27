@@ -5,25 +5,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import multicampus.project.multigo.R;
-import multicampus.project.multigo.ui.basket.ItemFragment.OnListFragmentInteractionListener;
-import multicampus.project.multigo.ui.basket.dummy.DummyContent.DummyItem;
+import multicampus.project.multigo.ui.basket.BasketFragment.OnListFragmentInteractionListener;
+import multicampus.project.multigo.data.ItemsVO;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link ItemsVO} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
+public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<ItemsVO> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyItemRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public BasketRecyclerViewAdapter(List<ItemsVO> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -31,15 +32,16 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_item, parent, false);
+                .inflate(R.layout.item_basket, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mNameView.setText(mValues.get(position).getName());
+        holder.mNumberView.setText(String.valueOf(mValues.get(position).getCnt()));
+        holder.mPriceView.setText(String.valueOf(mValues.get(position).getPrice()));
 
         holder.mView.setOnClickListener(v -> {
             if (null != mListener) {
@@ -56,21 +58,25 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        final View mView;
+        final TextView mNameView;
+        final TextView mPriceView;
+        final TextView mNumberView;
+        final Button mDeleteBtn;
+        ItemsVO mItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = view.findViewById(R.id.item_number);
-            mContentView = view.findViewById(R.id.content);
+            mNameView = view.findViewById(R.id.product_name);
+            mNumberView = view.findViewById(R.id.product_count);
+            mPriceView = view.findViewById(R.id.product_price);
+            mDeleteBtn = view.findViewById(R.id.product_cancel_btn);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mNumberView.getText() + "'";
         }
     }
 }

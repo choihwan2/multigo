@@ -17,6 +17,8 @@ import java.util.Objects;
 
 import multicampus.project.multigo.R;
 import multicampus.project.multigo.ui.login.LoginActivity;
+import multicampus.project.multigo.utils.AppHelper;
+import multicampus.project.multigo.utils.SharedMsg;
 
 public class MoresFragment extends Fragment {
 
@@ -33,6 +35,7 @@ public class MoresFragment extends Fragment {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            SharedMsg.getInstance().addMsg(AppHelper.TERMINATE);
             startActivity(intent);
             Objects.requireNonNull(getActivity()).finish();
         });

@@ -16,12 +16,12 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_basket"
-        android:name="multicampus.project.multigo.ui.basket.ItemFragment"
+        android:name="multicampus.project.multigo.ui.basket.BasketFragment"
         android:label="장바구니"
         tools:layout="@layout/fragment_item_list"/>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_history"
         android:name="multicampus.project.multigo.ui.history.PurchaseHistoryFragment"
         android:label="@string/title_receipts"
         tools:layout="@layout/fragment_purchase_history" />

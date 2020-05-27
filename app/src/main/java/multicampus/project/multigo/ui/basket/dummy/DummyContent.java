@@ -1,9 +1,14 @@
 package multicampus.project.multigo.ui.basket.dummy;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import multicampus.project.multigo.data.ItemsVO;
+import multicampus.project.multigo.data.LaisVO;
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -16,57 +21,61 @@ public class DummyContent {
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+    public static final List<ItemsVO> ITEMS = new ArrayList<ItemsVO>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static final Map<String, ItemsVO> ITEM_MAP = new HashMap<String, ItemsVO>();
 
-    private static final int COUNT = 25;
+    public static final List<LaisVO> LAIS_ITEMS = new ArrayList<>();
+
+    private static final int COUNT = 5;
 
     static {
         // Add some sample items.
         for (int i = 1; i <= COUNT; i++) {
             addItem(createDummyItem(i));
+            addList(createDummyListItem(i));
         }
     }
 
-    private static void addItem(DummyItem item) {
+    private static void addItem(ItemsVO item) {
         ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+        ITEM_MAP.put(item.getItem_id(), item);
     }
 
-    private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+    private static void addList(LaisVO item) {
+        LAIS_ITEMS.add(item);
     }
 
-    private static String makeDetails(int position) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(position);
-        for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
+    private static ItemsVO createDummyItem(int position) {
+        return new ItemsVO("ITEM00" + position, "Item " + position, 1000, 1);
+    }
+
+    private static LaisVO createDummyListItem(int position) {
+        return new LaisVO(0, ITEMS.get(position - 1).getItem_id(), ITEMS.get(position - 1).getCnt());
+    }
+
+    public static int getSum() {
+        int sum = 0;
+        for (ItemsVO item : ITEMS) {
+            sum += item.getPrice();
         }
-        return builder.toString();
+        return sum;
     }
 
-    /**
-     * A dummy item representing a piece of content.
-     */
-    public static class DummyItem {
-        public final String id;
-        public final String content;
-        public final String details;
-
-        public DummyItem(String id, String content, String details) {
-            this.id = id;
-            this.content = content;
-            this.details = details;
+    public static String getJsonItems() {
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonString = "";
+        try {
+            jsonString = mapper.writeValueAsString(LAIS_ITEMS);
+//            Log.d("DummyContent",jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        @Override
-        public String toString() {
-            return content;
-        }
+        return jsonString;
     }
+
+
 }
