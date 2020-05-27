@@ -48,10 +48,13 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
                 if (revString.equals(AppHelper.ENTER)){
                     Log.d("MainActivity","Enter 들어옴");
                     Toast.makeText(getApplicationContext(),"매장에 입장하였습니다.",Toast.LENGTH_SHORT).show();
+                    AppHelper.marketEnterOrOut(1);
                     navController.navigate(R.id.action_navigation_home_to_navigation_basket);
                 }
                 if (revString.equals(AppHelper.EXIT)){
                     Toast.makeText(getApplicationContext(),"매장에서 퇴장했습니다.",Toast.LENGTH_SHORT).show();
+                    AppHelper.marketEnterOrOut(0);
+                    navController.navigate(R.id.action_navigation_home_refresh);
                     Log.d("MainActivity","Exit 들어옴");
                 }
             }

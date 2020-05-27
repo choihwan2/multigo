@@ -10,6 +10,18 @@ import multicampus.project.multigo.data.ListsVO;
 
 public class AppHelper {
 
+    private AppHelper(){
+
+    }
+
+    public static AppHelper getInstance() {
+        return InnerInstanceClass.instance;
+    }
+
+    private static class InnerInstanceClass{
+        private static final AppHelper instance = new AppHelper();
+    }
+
     /*
         NOTE : Server 와의 프로토콜
      */
@@ -25,6 +37,8 @@ public class AppHelper {
     public static final String TERMINATE = "@@Terminate";
     public static final String THREAD_STOP = "@@STOP";
 
+    public static boolean isEntered = false;
+
     /*
      * NOTE 구매 리스트를 받아오는 함수
      */
@@ -38,5 +52,10 @@ public class AppHelper {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public static void marketEnterOrOut(int key){
+        // NOTE 입장시 1 나갈시 0
+        isEntered = key != 0;
     }
 }

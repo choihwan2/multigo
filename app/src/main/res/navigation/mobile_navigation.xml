@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_basket"
             app:destination="@id/navigation_basket" />
+
+        <action
+            android:id="@+id/action_navigation_home_refresh"
+            app:destination="@id/navigation_home"/>
     </fragment>
     <fragment
         android:id="@+id/navigation_basket"
