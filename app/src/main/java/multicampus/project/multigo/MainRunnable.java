@@ -60,6 +60,7 @@ public class MainRunnable implements Runnable {
                             continue;
                         }
                         if(revString.startsWith(AppHelper.TERMINATE)){
+                            SharedMsg.getInstance().addMsg("die");
                             if(br != null)
                                 br.close();
                             if(pw != null) {
@@ -97,18 +98,16 @@ public class MainRunnable implements Runnable {
             SharedMsg.getInstance().addMsg(AppHelper.LOGIN + FirebaseAuth.getInstance().getCurrentUser().getUid());
             while (true) {
                 String msg = sharedObj.popMsg();
-                Log.d("MainRunnable", msg + "를 보냈다!!");
-                Log.d("MainRunnable","Pw 가 null이에요.." + pw.toString());
-                if(pw != null) {
-                    Log.d("MainRunnable", "Pw 가 살아있어요" + pw.toString());
-                } else {
-                    Log.d("MainRunnable","Pw 가 null이에요.." + pw.toString());
+                if(msg.equals("die")){
+                    Log.d("MainRunnable","죽음이 찾아왔습니다.");
                     break;
                 }
+                Log.d("MainRunnable", msg + "를 보냈다!!");
                 pw.println(msg);
                 pw.flush();  // pw 는 exception 을 발생시키지 않는다.
             }
-        } catch (Exception e) { // 가장 위에 있는 try 의 catch 위의 pw가 아니다.
+            Log.d("MainRunnable","쓰레드가 죽었씁니다.");
+        } catch (Exception e) { // 가장 위에 있는 try 의 catch 이다. 위의 pw가 아니다.
             e.printStackTrace();
         }
     }
