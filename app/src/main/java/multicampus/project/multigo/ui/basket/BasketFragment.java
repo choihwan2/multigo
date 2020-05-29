@@ -1,6 +1,7 @@
 package multicampus.project.multigo.ui.basket;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -66,7 +69,9 @@ public class BasketFragment extends Fragment implements LifecycleOwner {
         }
     }
 
+
     private Observer<ArrayList<ItemsVO>> userListUpdateObserver = new Observer<ArrayList<ItemsVO>>() {
+        // NOTE ArrayList 를 보고 있다가 상품이 추가되면 새로 업데이트 해준다.
         @Override
         public void onChanged(ArrayList<ItemsVO> itemArrayList) {
             basketAdapter = new BasketRecyclerViewAdapter(itemArrayList, mListener);
@@ -83,16 +88,24 @@ public class BasketFragment extends Fragment implements LifecycleOwner {
         recyclerView = view.findViewById(R.id.basket_list);
 
         BasketViewModel basketViewModel = ViewModelProviders.of(this).get(BasketViewModel.class);
-        basketViewModel.getItemsVOMutableLiveData().observe(this,userListUpdateObserver);
+        basketViewModel.getItemsVOMutableLiveData().observe(this, userListUpdateObserver);
 
         Button sendBtn = view.findViewById(R.id.send_basket_btn);
         sendBtn.setOnClickListener(v -> {
             SharedMsg.getInstance().addMsg(AppHelper.ADD_LIST + DummyContent.getSum());
             SharedMsg.getInstance().addMsg(AppHelper.ADD_DETAIL + DummyContent.getJsonItems());
         });
+
+        FloatingActionButton floatingBtn = view.findViewById(R.id.floating_basket);
+        floatingBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(),QRScannerActivity.class);
+            startActivity(intent);
+        });
+
+
         Button addBtn = view.findViewById(R.id.add_basket_btn);
         addBtn.setOnClickListener(v -> {
-            basketViewModel.addItem(new ItemsVO("001","과자",5000,1));
+            basketViewModel.addItem(new ItemsVO("001", "과자", 5000, 1));
         });
         return view;
     }

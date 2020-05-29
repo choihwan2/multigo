@@ -13,8 +13,6 @@ public class BasketViewModel extends ViewModel {
 
     public BasketViewModel() {
         itemLiveData = new MutableLiveData<>();
-
-        // call your Rest API in init method
         init();
     }
 
