@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +67,10 @@ public class BasketFragment extends Fragment implements LifecycleOwner {
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+
+            Log.d("BasketFragment","getArgument 생성되었습니다!");
         }
+        Log.d("BasketFragment","프래그먼트가 생성되었습니다!");
     }
 
 
@@ -77,6 +81,8 @@ public class BasketFragment extends Fragment implements LifecycleOwner {
             basketAdapter = new BasketRecyclerViewAdapter(itemArrayList, mListener);
             recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
             recyclerView.setAdapter(basketAdapter);
+
+            Log.d("BasketFragment","onChanged 에 들어왔습니다.");
         }
     };
 

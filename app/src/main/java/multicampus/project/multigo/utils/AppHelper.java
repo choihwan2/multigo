@@ -37,6 +37,9 @@ public class AppHelper {
     public static final String TERMINATE = "@@Terminate";
     public static final String THREAD_STOP = "@@STOP";
 
+    private static String userId = "";
+
+
     public static boolean isEntered = true;
 
     /*
@@ -57,5 +60,13 @@ public class AppHelper {
     public static void marketEnterOrOut(int key){
         // NOTE 입장시 1 나갈시 0
         isEntered = key != 0;
+    }
+
+    public static String getUserId() {
+        return userId;
+    }
+
+    public static void setUserId(String userId) {
+        AppHelper.userId = userId;
     }
 }

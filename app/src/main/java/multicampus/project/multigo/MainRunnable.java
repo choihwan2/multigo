@@ -51,7 +51,7 @@ public class MainRunnable implements Runnable {
                         if (revString.startsWith(AppHelper.GET_LIST)){
                             String jsonString = revString.replace(AppHelper.GET_LIST, "");
                             List<ListsVO> list = AppHelper.initListData(jsonString);
-                            MainData.getInstance().setmLists(list);
+                            MainData.getInstance().setUserLists(list);
                             continue;
                         }
                         if(revString.startsWith(AppHelper.TERMINATE)){

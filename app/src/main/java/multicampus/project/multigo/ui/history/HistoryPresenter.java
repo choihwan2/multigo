@@ -12,7 +12,7 @@ public class HistoryPresenter {
     }
 
     public void initData() {
-        List<ListsVO> data = MainData.getInstance().getmLists();
+        List<ListsVO> data = MainData.getInstance().getUserLists();
         view.addData(data);
     }
 

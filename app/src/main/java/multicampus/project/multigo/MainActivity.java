@@ -14,11 +14,15 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import multicampus.project.multigo.data.ItemsVO;
+import multicampus.project.multigo.data.userEnteredData;
 import multicampus.project.multigo.ui.basket.BasketFragment;
 import multicampus.project.multigo.utils.AppHelper;
 import multicampus.project.multigo.utils.SharedMsg;
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
 
     public static ExecutorService executorService = Executors.newCachedThreadPool();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +40,8 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
         BottomNavigationView navView = findViewById(R.id.nav_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
-        Log.d("MainActivity","onCreate 생성됨");
 
-
+        AppHelper.setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         @SuppressLint("HandlerLeak") Handler handler = new Handler() {
             @Override
@@ -77,9 +81,6 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
 
     @Override
     protected void onDestroy() {
-        //SharedMsg.getInstance().addMsg(AppHelper.TERMINATE);
-
-        //Log.d("MainActivity", "onDestory 호출");
         super.onDestroy();
     }
 }
