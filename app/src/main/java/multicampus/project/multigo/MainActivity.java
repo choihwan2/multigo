@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
                     mEntranceRef.setValue(new userEnteredData("-1",false));
 //                    AppHelper.marketEnterOrOut(0);
 //                    navController.navigate(R.id.action_navigation_home_refresh);
-                    Log.d("MainActivity","Exit 들어옴");
+//                    Log.d("MainActivity","Exit 들어옴");
                 }
             }
         };
@@ -89,10 +89,12 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
                 if(entDate != null) {
                     AppHelper.setIsEntered(entDate.isEnterState());
                     Log.d("MainActivity","enterState 변경 성공");
-//                    if(entDate.isEnterState()){
+                    if(entDate.isEnterState()){
 //                        SharedMsg.getInstance().addMsg("@@Enter " + entDate.getId()+ " " + AppHelper.getUserId());
-//                        navController.navigate(R.id.action_navigation_home_to_navigation_basket);
-//                    }
+                        navController.navigate(R.id.action_navigation_home_to_navigation_basket);
+                    }else{
+                        navController.navigate(R.id.action_navigation_home_refresh);
+                    }
                 }else {
                     mEntranceRef.setValue(new userEnteredData("-1",false));
                 }

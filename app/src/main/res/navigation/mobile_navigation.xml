@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
+    <action
+        android:id="@+id/action_navigation_home_to_navigation_basket"
+        app:destination="@id/navigation_basket" />
 
+    <action
+        android:id="@+id/action_navigation_home_refresh"
+        app:destination="@id/navigation_home"/>
     <fragment
         android:id="@+id/navigation_home"
         android:name="multicampus.project.multigo.ui.home.HomeFragment"
         android:label="@string/title_key"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_navigation_home_to_navigation_basket"
-            app:destination="@id/navigation_basket" />
 
-        <action
-            android:id="@+id/action_navigation_home_refresh"
-            app:destination="@id/navigation_home"/>
         <action
             android:id="@+id/action_navigation_home_to_navigation_history"
             app:destination="@id/navigation_history" />
