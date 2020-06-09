@@ -43,32 +43,36 @@ public class MainRunnable implements Runnable {
              */
             Runnable revRunnable = () -> {
                 try {
-                    Log.d("revRunnable","revRunnable이 실행 되었습니다." +  Thread.currentThread().getName());
+                    Log.d("revRunnable", "revRunnable이 실행 되었습니다." + Thread.currentThread().getName());
                     String revString = "";
                     while ((revString = br.readLine()) != null) {
-                        Log.d("revRunnable",revString + "메시지 읽음");
+                        Log.d("revRunnable", revString + "메시지 읽음");
 
-                        if (revString.startsWith(AppHelper.GET_LIST)){
+                        if (revString.startsWith(AppHelper.GET_LIST)) {
                             String jsonString = revString.replace(AppHelper.GET_LIST, "");
                             List<ListsVO> list = AppHelper.initListData(jsonString);
-                            MainData.getInstance().setmLists(list);
+                            MainData.getInstance().setUserLists(list);
                             continue;
                         }
-                        if(revString.startsWith(AppHelper.TERMINATE)){
+
+                        if (revString.startsWith(AppHelper.LOGIN)) {
+                            if(!revString.split(" ")[2].equals("0")){
+                                revString = AppHelper.ENTER + " " + revString.split(" ")[2];
+                                Log.d("MainRunnable", revString + "메시지를 엑티비티에 보냅니다.");
+                            }
+                            SharedMsg.getInstance().addMsg(AppHelper.GET_LIST + FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        }
+
+                        if (revString.startsWith(AppHelper.TERMINATE)) {
                             SharedMsg.getInstance().addMsg(AppHelper.THREAD_STOP);
-                            if(br != null)
+                            if (br != null)
                                 br.close();
-                            if(pw != null) {
-                                Log.d("revRunnable","pw를 null 로 만듬!" + pw.toString());
+                            if (pw != null) {
+                                Log.d("revRunnable", "pw를 null 로 만듬!" + pw.toString());
                                 pw.close();
                             }
                             s.close();
                             break;
-                        }
-
-                        if(revString.startsWith(AppHelper.LOGIN)){
-                            SharedMsg.getInstance().addMsg(AppHelper.GET_LIST + FirebaseAuth.getInstance().getCurrentUser().getUid());
-                            continue;
                         }
                         Message msg = new Message();
                         Bundle bundle = new Bundle();
@@ -77,9 +81,9 @@ public class MainRunnable implements Runnable {
 
                         handler.sendMessage(msg);
                     }
-                    Log.d("MainRunnable","while 끝남 들어옴");
+                    Log.d("MainRunnable", "while 끝남 들어옴");
                 } catch (IOException e) {
-                    Log.d("MainRunnable","서버와 연결이 실패했습니다.");
+                    Log.d("MainRunnable", "서버와 연결이 실패했습니다.");
                     e.printStackTrace();
                 }
             };
@@ -91,15 +95,14 @@ public class MainRunnable implements Runnable {
             SharedMsg.getInstance().addMsg(AppHelper.LOGIN + FirebaseAuth.getInstance().getCurrentUser().getUid());
             while (true) {
                 String msg = sharedObj.popMsg();
-                if(msg.equals(AppHelper.THREAD_STOP)){
-                    Log.d("MainRunnable","죽음이 찾아왔습니다.");
+                if (msg.equals(AppHelper.THREAD_STOP)) {
+                    // Thread 가 DeadLock 에 빠지지 않기 위해
                     break;
                 }
                 Log.d("MainRunnable", msg + "를 보냈다!!");
                 pw.println(msg);
                 pw.flush();  // pw 는 exception 을 발생시키지 않는다.
             }
-            Log.d("MainRunnable","쓰레드가 죽었씁니다.");
         } catch (Exception e) { // 가장 위에 있는 try 의 catch 이다. 위의 pw가 아니다.
             e.printStackTrace();
         }

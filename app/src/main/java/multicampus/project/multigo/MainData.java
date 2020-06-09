@@ -6,6 +6,9 @@ import multicampus.project.multigo.data.ListsVO;
 
 public class MainData {
 
+
+    private List<ListsVO> userLists;
+
     private MainData() {
 
     }
@@ -18,14 +21,13 @@ public class MainData {
         return MainData.InnerInstanceClass.instance;
     }
 
-    private List<ListsVO> mLists;
 
 
-    public void setmLists(List<ListsVO> mLists) {
-        this.mLists = mLists;
+    public void setUserLists(List<ListsVO> userLists) {
+        this.userLists = userLists;
     }
 
-    public List<ListsVO> getmLists() {
-        return mLists;
+    public List<ListsVO> getUserLists() {
+        return userLists;
     }
 }

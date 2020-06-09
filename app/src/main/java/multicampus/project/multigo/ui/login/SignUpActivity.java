@@ -87,8 +87,6 @@ public class SignUpActivity extends AppCompatActivity {
                         Log.w("LoginActivity", "createUserWithEmail:failure", task.getException());
                         Toast.makeText(SignUpActivity.this, "가입에 실패하였습니다.",
                                 Toast.LENGTH_SHORT).show();
-
-                        return;
                     }
                 });
 

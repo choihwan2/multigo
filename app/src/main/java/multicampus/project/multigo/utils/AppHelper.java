@@ -37,7 +37,15 @@ public class AppHelper {
     public static final String TERMINATE = "@@Terminate";
     public static final String THREAD_STOP = "@@STOP";
 
-    public static boolean isEntered = false;
+    /*
+        NOTE : Firebase 에서 사용되는 정보들
+     */
+
+    private static String userId = "";
+    public static final String ENTRANCE_REF = "Entrance";
+
+
+    public static boolean isEntered;
 
     /*
      * NOTE 구매 리스트를 받아오는 함수
@@ -57,5 +65,17 @@ public class AppHelper {
     public static void marketEnterOrOut(int key){
         // NOTE 입장시 1 나갈시 0
         isEntered = key != 0;
+    }
+
+    public static void setIsEntered(boolean isEntered) {
+        AppHelper.isEntered = isEntered;
+    }
+
+    public static String getUserId() {
+        return userId;
+    }
+
+    public static void setUserId(String userId) {
+        AppHelper.userId = userId;
     }
 }

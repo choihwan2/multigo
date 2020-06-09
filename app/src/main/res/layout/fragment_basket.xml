@@ -17,15 +17,35 @@
         tools:listitem="@layout/item_basket"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHeight_percent="0.8"/>
+        app:layout_constraintHeight_percent="0.9"/>
 
+
+    <Button
+        android:id="@+id/add_basket_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toLeftOf="@id/send_basket_btn"
+        app:layout_constraintBottom_toBottomOf="@id/send_basket_btn"
+        android:text="데이터 추가"
+        android:layout_marginRight="20dp"/>
     <Button
         android:id="@+id/send_basket_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="보내기"
         app:layout_constraintTop_toBottomOf="@id/basket_list"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/add_basket_btn"
         app:layout_constraintRight_toRightOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_basket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/basket_list"
+        app:layout_constraintEnd_toEndOf="@id/basket_list"
+        app:rippleColor="@android:color/holo_orange_dark"/>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
