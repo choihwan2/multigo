@@ -54,7 +54,7 @@ public class DummyContent {
     }
 
     private static LaisVO createDummyListItem(int position) {
-        return new LaisVO(0, ITEMS.get(position - 1).getItem_id(), ITEMS.get(position - 1).getCnt());
+        return new LaisVO(0, ITEMS.get(position - 1).getItem_id(), 1);
     }
 
     public static int getSum() {

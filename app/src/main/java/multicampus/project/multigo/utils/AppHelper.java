@@ -1,11 +1,15 @@
 package multicampus.project.multigo.utils;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import multicampus.project.multigo.data.ItemsVO;
 import multicampus.project.multigo.data.ListsVO;
 
 public class AppHelper {
@@ -43,29 +47,38 @@ public class AppHelper {
 
     private static String userId = "";
     public static final String ENTRANCE_REF = "Entrance";
-
-
+    public static final String BASKET_REF = "Basket";
     public static boolean isEntered;
 
     /*
-     * NOTE 구매 리스트를 받아오는 함수
+        NOTE Jackson Library 에서 사용되는 변수들
+     */
+    private static ObjectMapper mapper = new ObjectMapper();
+    private static TypeReference<ArrayList<ListsVO>> listTypeRef = new TypeReference<ArrayList<ListsVO>>() {};
+
+    /*
+     * NOTE 서버에서 받아온 구매 리스트 String 을 Json 형태로 변환하는 함수
      */
     public static List<ListsVO> initListData(String revString) {
         List<ListsVO> list = null;
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            list = mapper.readValue(revString, new TypeReference<ArrayList<ListsVO>>() {
-            });
+            list = mapper.readValue(revString, listTypeRef);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
 
-    public static void marketEnterOrOut(int key){
-        // NOTE 입장시 1 나갈시 0
-        isEntered = key != 0;
+    public static ItemsVO toJsonItemVO(String revString){
+        ItemsVO item = null;
+        try {
+            item = mapper.readValue(revString,ItemsVO.class);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return item;
     }
+
 
     public static void setIsEntered(boolean isEntered) {
         AppHelper.isEntered = isEntered;

@@ -40,14 +40,14 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mNameView.setText(mValues.get(position).getName());
-        holder.mNumberView.setText(String.valueOf(mValues.get(position).getCnt()));
+        holder.mNumberView.setText("1");
         holder.mPriceView.setText(String.valueOf(mValues.get(position).getPrice()));
 
         holder.mView.setOnClickListener(v -> {
             if (null != mListener) {
                 // Notify the active callbacks interface (the activity, if the
                 // fragment is attached to one) that an item has been selected.
-                mListener.onListFragmentInteraction(holder.mItem);
+//                mListener.onListFragmentInteraction(holder.mItem);
             }
         });
     }

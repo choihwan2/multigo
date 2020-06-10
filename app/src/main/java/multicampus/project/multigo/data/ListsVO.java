@@ -8,7 +8,16 @@ public class ListsVO {
 	private String purchase_date;
 	private int total;
 	private String user_id;
-	
+	private int market_id;
+
+	public int getMarket_id() {
+		return market_id;
+	}
+
+	public void setMarket_id(int market_id) {
+		this.market_id = market_id;
+	}
+
 	public int getList_id() {
 		return list_id;
 	}
@@ -19,6 +28,7 @@ public class ListsVO {
 		try {
 			Date nowDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(purchase_date);
 			SimpleDateFormat f = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+			assert nowDate != null;
 			purchase_date = f.format(nowDate);
 		}catch (Exception e){
 			e.printStackTrace();
