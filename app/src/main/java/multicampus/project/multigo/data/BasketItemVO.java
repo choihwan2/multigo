@@ -6,6 +6,10 @@ public class BasketItemVO {
     private int price;
     private int cnt;
 
+    BasketItemVO(){
+
+    }
+
     public BasketItemVO(String item_id, String name, int price, int cnt) {
         this.item_id = item_id;
         this.name = name;

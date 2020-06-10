@@ -29,14 +29,17 @@ public class QRScannerActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
-            if(result.getContents() == null) {
+        if (result != null) {
+            if (result.getContents() == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
                 finish();
             } else {
                 // NOTE QR 리더에 성공했을때 다시 MainActivity 로 돌아가야한다.
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-                SharedMsg.getInstance().addMsg(AppHelper.GET_ITEM + result.getContents());
+                if (result.getContents().startsWith("ITEM")) {
+                    SharedMsg.getInstance().addMsg(AppHelper.GET_ITEM + result.getContents());
+                }else{
+                    Toast.makeText(this, "올바른 상품을 스캔해주세요", Toast.LENGTH_LONG).show();
+                }
                 integrator.initiateScan();
             }
         } else {

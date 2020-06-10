@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import multicampus.project.multigo.data.BasketItemVO;
 import multicampus.project.multigo.data.ItemsVO;
 import multicampus.project.multigo.data.userEnteredData;
 import multicampus.project.multigo.ui.basket.BasketFragment;
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
     }
 
     @Override
-    public void onListFragmentInteraction(ItemsVO item) {
+    public void onListFragmentInteraction(BasketItemVO item) {
         Log.d("MainActivity",item.getItem_id());
     }
 

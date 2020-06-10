@@ -55,7 +55,6 @@ public class AppHelper {
      */
     private static ObjectMapper mapper = new ObjectMapper();
     private static TypeReference<ArrayList<ListsVO>> listTypeRef = new TypeReference<ArrayList<ListsVO>>() {};
-    private static TypeReference<ItemsVO> itemTypeRef = new TypeReference<ItemsVO>() {};
 
     /*
      * NOTE 서버에서 받아온 구매 리스트 String 을 Json 형태로 변환하는 함수
