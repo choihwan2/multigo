@@ -6,6 +6,8 @@ import android.os.Message;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +16,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 
+import multicampus.project.multigo.data.BasketItemVO;
+import multicampus.project.multigo.data.ItemsVO;
 import multicampus.project.multigo.data.ListsVO;
 import multicampus.project.multigo.utils.AppHelper;
 import multicampus.project.multigo.utils.HttpManager;
@@ -25,6 +29,7 @@ public class MainRunnable implements Runnable {
     private PrintWriter pw;
     private SharedMsg sharedObj = SharedMsg.getInstance();
     private Handler handler;
+    private DatabaseReference mBasketReference = FirebaseDatabase.getInstance().getReference().child(AppHelper.BASKET_REF).child(AppHelper.getUserId());
 
     MainRunnable(Handler handler) {
         this.handler = handler;
@@ -49,6 +54,9 @@ public class MainRunnable implements Runnable {
                         Log.d("revRunnable", revString + "메시지 읽음");
 
                         if (revString.startsWith(AppHelper.GET_LIST)) {
+                            /*
+                             NOTE 구매했던 내역을 받아오는 부분
+                             */
                             String jsonString = revString.replace(AppHelper.GET_LIST, "");
                             List<ListsVO> list = AppHelper.initListData(jsonString);
                             MainData.getInstance().setUserLists(list);
@@ -56,6 +64,9 @@ public class MainRunnable implements Runnable {
                         }
 
                         if (revString.startsWith(AppHelper.LOGIN)) {
+                            /*
+                             NOTE 첫 로그인시 매장에 방문한 상태인지 확인
+                             */
                             if(!revString.split(" ")[2].equals("0")){
                                 revString = AppHelper.ENTER + " " + revString.split(" ")[2];
                                 Log.d("MainRunnable", revString + "메시지를 엑티비티에 보냅니다.");
@@ -63,7 +74,19 @@ public class MainRunnable implements Runnable {
                             SharedMsg.getInstance().addMsg(AppHelper.GET_LIST + FirebaseAuth.getInstance().getCurrentUser().getUid());
                         }
 
+                        if(revString.startsWith(AppHelper.GET_ITEM)){
+                            revString = revString.replace(AppHelper.GET_ITEM,"");
+                            Log.d("MainRunnable",revString + "을 받아와서 정제한다음 출력합니다.");
+                            ItemsVO item = AppHelper.toJsonItemVO(revString);
+                            BasketItemVO basketItem = item.toBasketItem();
+                            mBasketReference.push().setValue(basketItem);
+                            continue;
+                        }
+
                         if (revString.startsWith(AppHelper.TERMINATE)) {
+                            /*
+                             NOTE 앱이 종료되었을 때 서버와 신호를 주고받아 Thread 가 DeadLock 으로 빠지는걸 방지한다.
+                             */
                             SharedMsg.getInstance().addMsg(AppHelper.THREAD_STOP);
                             if (br != null)
                                 br.close();

@@ -62,15 +62,10 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
                     Log.d("MainActivity", revString + "메시지 받음");
                     Toast.makeText(getApplicationContext(),"매장에 입장하였습니다.",Toast.LENGTH_SHORT).show();
                     mEntranceRef.setValue(new userEnteredData(revString.split(" ")[1],true));
-//                    AppHelper.marketEnterOrOut(1);
-//                    navController.navigate(R.id.action_navigation_home_to_navigation_basket);
                 }
                 if (revString.startsWith(AppHelper.EXIT)){
                     Toast.makeText(getApplicationContext(),"매장에서 퇴장했습니다.",Toast.LENGTH_SHORT).show();
                     mEntranceRef.setValue(new userEnteredData("-1",false));
-//                    AppHelper.marketEnterOrOut(0);
-//                    navController.navigate(R.id.action_navigation_home_refresh);
-//                    Log.d("MainActivity","Exit 들어옴");
                 }
             }
         };
@@ -88,9 +83,8 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
                 userEnteredData entDate = dataSnapshot.getValue(userEnteredData.class);
                 if(entDate != null) {
                     AppHelper.setIsEntered(entDate.isEnterState());
-                    Log.d("MainActivity","enterState 변경 성공");
+                    Log.d("MainActivity","enterState 변경됨");
                     if(entDate.isEnterState()){
-//                        SharedMsg.getInstance().addMsg("@@Enter " + entDate.getId()+ " " + AppHelper.getUserId());
                         navController.navigate(R.id.action_navigation_home_to_navigation_basket);
                     }else{
                         navController.navigate(R.id.action_navigation_home_refresh);
@@ -98,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
                 }else {
                     mEntranceRef.setValue(new userEnteredData("-1",false));
                 }
-                Log.d("MainActivity","마켓입장여부 성공" + entDate.isEnterState());
             }
 
             @Override
