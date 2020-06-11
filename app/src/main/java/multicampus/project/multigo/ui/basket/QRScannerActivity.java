@@ -35,7 +35,7 @@ public class QRScannerActivity extends AppCompatActivity {
                 finish();
             } else {
                 // NOTE QR 리더에 성공했을때 다시 MainActivity 로 돌아가야한다.
-                if (result.getContents().startsWith("ITEM")) {
+                if (result.getContents().startsWith(AppHelper.ITEM_START)) {
                     SharedMsg.getInstance().addMsg(AppHelper.GET_ITEM + result.getContents());
                 }else{
                     Toast.makeText(this, "올바른 상품을 스캔해주세요", Toast.LENGTH_LONG).show();

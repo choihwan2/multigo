@@ -40,6 +40,7 @@ public class AppHelper {
     public static final String ADD_DETAIL = "@@AddLais ";
     public static final String TERMINATE = "@@Terminate";
     public static final String THREAD_STOP = "@@STOP";
+    public static final String ITEM_START = "ITEM";
 
     /*
         NOTE : Firebase 에서 사용되는 정보들

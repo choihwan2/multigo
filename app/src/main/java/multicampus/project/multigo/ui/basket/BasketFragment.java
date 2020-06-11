@@ -5,12 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -23,12 +17,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-
 import multicampus.project.multigo.R;
 import multicampus.project.multigo.data.BasketItemVO;
-import multicampus.project.multigo.data.ItemsVO;
-import multicampus.project.multigo.data.ListsVO;
 import multicampus.project.multigo.ui.basket.dummy.DummyContent;
 import multicampus.project.multigo.utils.AppHelper;
 import multicampus.project.multigo.utils.SharedMsg;
@@ -45,7 +35,7 @@ public class BasketFragment extends Fragment{
     private DatabaseReference mBasketRef;
 
     private RecyclerView recyclerView;
-    private BasketRecyclerViewAdapter2 mAdapter;
+    private BasketRecyclerViewAdapter mAdapter;
     private View view;
 
     public BasketFragment() {
@@ -61,29 +51,12 @@ public class BasketFragment extends Fragment{
         Log.d("BasketFragment","프래그먼트가 생성되었습니다!");
     }
 
-
-//    private Observer<ArrayList<ItemsVO>> userListUpdateObserver = new Observer<ArrayList<ItemsVO>>() {
-//        // NOTE ArrayList 를 보고 있다가 상품이 추가되면 새로 업데이트 해준다.
-//        @Override
-//        public void onChanged(ArrayList<ItemsVO> itemArrayList) {
-//            BasketRecyclerViewAdapter basketAdapter = new BasketRecyclerViewAdapter(itemArrayList, mListener);
-//            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-//            recyclerView.setAdapter(basketAdapter);
-//
-//            Log.d("BasketFragment","onChanged 에 들어왔습니다.");
-//        }
-//    };
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_basket, container, false);
 
         recyclerView = view.findViewById(R.id.basket_list);
-
-
-//        BasketViewModel basketViewModel = ViewModelProviders.of(this).get(BasketViewModel.class);
-//        basketViewModel.getItemsVOMutableLiveData().observe(this, userListUpdateObserver);
 
         Button sendBtn = view.findViewById(R.id.send_basket_btn);
         sendBtn.setOnClickListener(v -> {
@@ -98,19 +71,13 @@ public class BasketFragment extends Fragment{
         });
 
 
-//        Button addBtn = view.findViewById(R.id.add_basket_btn);
-
-//        addBtn.setOnClickListener(v -> {
-//            basketViewModel.addItem(new ItemsVO("001", "과자", 5000, 1));
-//        });
         return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
-        mAdapter = new BasketRecyclerViewAdapter2(mListener,mBasketRef);
+        mAdapter = new BasketRecyclerViewAdapter(mListener,mBasketRef);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -129,6 +96,7 @@ public class BasketFragment extends Fragment{
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        mAdapter.cleanupListener();
     }
 
     /*
