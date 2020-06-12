@@ -1,4 +1,4 @@
-package multicampus.project.multigo.ui.mores;
+package multicampus.project.multigo.fragment.mores;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Objects;
 
 import multicampus.project.multigo.R;
-import multicampus.project.multigo.ui.login.LoginActivity;
+import multicampus.project.multigo.fragment.login.LoginActivity;
 import multicampus.project.multigo.utils.AppHelper;
 import multicampus.project.multigo.utils.SharedMsg;
 

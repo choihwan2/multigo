@@ -1,4 +1,4 @@
-package multicampus.project.multigo.ui.notifications;
+package multicampus.project.multigo.fragment.notifications;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -1,13 +1,32 @@
-package multicampus.project.multigo;
+package multicampus.project.multigo.main;
 
 import java.util.List;
 
+import multicampus.project.multigo.data.BasketItemVO;
 import multicampus.project.multigo.data.ListsVO;
 
 public class MainData {
 
 
     private List<ListsVO> userLists;
+    private List<BasketItemVO> basketList;
+    private List<String> basketKeys;
+
+    public List<BasketItemVO> getBasketList() {
+        return basketList;
+    }
+
+    public void setBasketList(List<BasketItemVO> basketList) {
+        this.basketList = basketList;
+    }
+
+    public List<String> getBasketKeys() {
+        return basketKeys;
+    }
+
+    public void setBasketKeys(List<String> basketKeys) {
+        this.basketKeys = basketKeys;
+    }
 
     private MainData() {
 

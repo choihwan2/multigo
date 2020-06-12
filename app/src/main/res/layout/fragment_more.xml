@@ -6,7 +6,7 @@
     android:background="@color/contentBodyColor"
     android:orientation="vertical"
     android:padding="30dp"
-    tools:context=".ui.mores.MoresFragment">
+    tools:context=".fragment.mores.MoresFragment">
 
 
     <TextView

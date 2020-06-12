@@ -1,6 +1,7 @@
-package multicampus.project.multigo;
+package multicampus.project.multigo.main;
 
 import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,10 +25,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import multicampus.project.multigo.R;
 import multicampus.project.multigo.data.BasketItemVO;
-import multicampus.project.multigo.data.ItemsVO;
 import multicampus.project.multigo.data.userEnteredData;
-import multicampus.project.multigo.ui.basket.BasketFragment;
+import multicampus.project.multigo.fragment.basket.BasketFragment;
+import multicampus.project.multigo.runnable.MainRunnable;
 import multicampus.project.multigo.utils.AppHelper;
 import multicampus.project.multigo.utils.SharedMsg;
 

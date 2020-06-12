@@ -1,4 +1,4 @@
-package multicampus.project.multigo.ui.home;
+package multicampus.project.multigo.fragment.home;
 
 import android.graphics.Bitmap;
 

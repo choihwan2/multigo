@@ -13,7 +13,7 @@
         app:destination="@id/navigation_home"/>
     <fragment
         android:id="@+id/navigation_home"
-        android:name="multicampus.project.multigo.ui.home.HomeFragment"
+        android:name="multicampus.project.multigo.fragment.home.HomeFragment"
         android:label="@string/title_key"
         tools:layout="@layout/fragment_home" >
 
@@ -23,13 +23,13 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_basket"
-        android:name="multicampus.project.multigo.ui.basket.BasketFragment"
+        android:name="multicampus.project.multigo.fragment.basket.BasketFragment"
         android:label="장바구니"
         tools:layout="@layout/fragment_item_list"/>
 
     <fragment
         android:id="@+id/navigation_history"
-        android:name="multicampus.project.multigo.ui.history.PurchaseHistoryFragment"
+        android:name="multicampus.project.multigo.fragment.history.PurchaseHistoryFragment"
         android:label="@string/title_receipts"
         tools:layout="@layout/fragment_purchase_history" >
         <action
@@ -39,13 +39,13 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="multicampus.project.multigo.ui.notifications.NotificationsFragment"
+        android:name="multicampus.project.multigo.fragment.notifications.NotificationsFragment"
         android:label="@string/title_stores"
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
         android:id="@+id/navigation_more"
-        android:name="multicampus.project.multigo.ui.mores.MoresFragment"
+        android:name="multicampus.project.multigo.fragment.mores.MoresFragment"
         android:label="@string/title_more"
         tools:layout="@layout/fragment_more" />
 </navigation>

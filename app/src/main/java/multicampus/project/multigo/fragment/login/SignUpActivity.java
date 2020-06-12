@@ -1,4 +1,4 @@
-package multicampus.project.multigo.ui.login;
+package multicampus.project.multigo.fragment.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-import multicampus.project.multigo.MainActivity;
+import multicampus.project.multigo.main.MainActivity;
 import multicampus.project.multigo.R;
 
 public class SignUpActivity extends AppCompatActivity {

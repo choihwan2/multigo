@@ -1,4 +1,4 @@
-package multicampus.project.multigo.ui.notifications;
+package multicampus.project.multigo.fragment.notifications;
 
 import android.os.Bundle;
 import android.util.Log;

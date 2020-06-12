@@ -1,4 +1,4 @@
-package multicampus.project.multigo.ui.history;
+package multicampus.project.multigo.fragment.history;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import multicampus.project.multigo.R;
 import multicampus.project.multigo.data.ListsVO;
-import multicampus.project.multigo.ui.basket.BasketFragment.OnListFragmentInteractionListener;
+import multicampus.project.multigo.fragment.basket.BasketFragment.OnListFragmentInteractionListener;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link ListsVO} and makes a call to the

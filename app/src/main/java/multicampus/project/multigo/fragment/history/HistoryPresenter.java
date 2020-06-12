@@ -1,8 +1,8 @@
-package multicampus.project.multigo.ui.history;
+package multicampus.project.multigo.fragment.history;
 
 import java.util.List;
 
-import multicampus.project.multigo.MainData;
+import multicampus.project.multigo.main.MainData;
 import multicampus.project.multigo.data.ListsVO;
 
 public class HistoryPresenter {

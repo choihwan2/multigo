@@ -1,5 +1,6 @@
-package multicampus.project.multigo;
+package multicampus.project.multigo.runnable;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,7 +20,10 @@ import java.util.List;
 import multicampus.project.multigo.data.BasketItemVO;
 import multicampus.project.multigo.data.ItemsVO;
 import multicampus.project.multigo.data.ListsVO;
+import multicampus.project.multigo.main.MainActivity;
+import multicampus.project.multigo.main.MainData;
 import multicampus.project.multigo.utils.AppHelper;
+import multicampus.project.multigo.utils.FirebaseSharedMsg;
 import multicampus.project.multigo.utils.HttpManager;
 import multicampus.project.multigo.utils.SharedMsg;
 
@@ -31,7 +35,7 @@ public class MainRunnable implements Runnable {
     private Handler handler;
     private DatabaseReference mBasketReference = FirebaseDatabase.getInstance().getReference().child(AppHelper.BASKET_REF).child(AppHelper.getUserId());
 
-    MainRunnable(Handler handler) {
+    public MainRunnable(Handler handler) {
         this.handler = handler;
     }
 
@@ -78,8 +82,13 @@ public class MainRunnable implements Runnable {
                             revString = revString.replace(AppHelper.GET_ITEM,"");
                             Log.d("MainRunnable",revString + "을 받아와서 정제한다음 출력합니다.");
                             ItemsVO item = AppHelper.toJsonItemVO(revString);
-                            BasketItemVO basketItem = item.toBasketItem();
-                            mBasketReference.push().setValue(basketItem);
+                            int cnt = Integer.parseInt(FirebaseSharedMsg.getInstance().popMsg());
+                            if(cnt > 0) {
+                                BasketItemVO basketItem = item.toBasketItem(cnt);
+                                mBasketReference.push().setValue(basketItem);
+                            }else{
+                                Log.d("MainRunnable","상품 수량 입력 이상함");
+                            }
                             continue;
                         }
 

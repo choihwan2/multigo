@@ -1,6 +1,5 @@
-package multicampus.project.multigo.ui.login;
+package multicampus.project.multigo.fragment.login;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import multicampus.project.multigo.MainActivity;
+import multicampus.project.multigo.main.MainActivity;
 import multicampus.project.multigo.R;
 
 public class LoginActivity extends AppCompatActivity {

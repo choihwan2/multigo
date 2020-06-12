@@ -1,4 +1,4 @@
-package multicampus.project.multigo.ui.basket;
+package multicampus.project.multigo.fragment.basket;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +20,8 @@ import java.util.List;
 
 import multicampus.project.multigo.R;
 import multicampus.project.multigo.data.BasketItemVO;
-import multicampus.project.multigo.ui.basket.BasketFragment.OnListFragmentInteractionListener;
+import multicampus.project.multigo.fragment.basket.BasketFragment.OnListFragmentInteractionListener;
+import multicampus.project.multigo.main.MainData;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link BasketItemVO} and makes a call to the
@@ -46,6 +47,8 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
 
                 mItemsId.add(dataSnapshot.getKey());
                 mBasketItems.add(item);
+                MainData.getInstance().setBasketKeys(mItemsId);
+                MainData.getInstance().setBasketList(mBasketItems);
                 notifyItemInserted(mBasketItems.size() - 1);
             }
 

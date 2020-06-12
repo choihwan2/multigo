@@ -1,4 +1,4 @@
-package multicampus.project.multigo.ui.mores;
+package multicampus.project.multigo.fragment.mores;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

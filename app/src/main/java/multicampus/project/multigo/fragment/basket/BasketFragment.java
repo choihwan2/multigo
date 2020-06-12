@@ -1,4 +1,4 @@
-package multicampus.project.multigo.ui.basket;
+package multicampus.project.multigo.fragment.basket;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import multicampus.project.multigo.R;
 import multicampus.project.multigo.data.BasketItemVO;
-import multicampus.project.multigo.ui.basket.dummy.DummyContent;
+import multicampus.project.multigo.fragment.basket.dummy.DummyContent;
 import multicampus.project.multigo.utils.AppHelper;
 import multicampus.project.multigo.utils.SharedMsg;
 

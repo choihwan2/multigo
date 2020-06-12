@@ -1,4 +1,4 @@
-package multicampus.project.multigo.ui.basket.dummy;
+package multicampus.project.multigo.fragment.basket.dummy;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
