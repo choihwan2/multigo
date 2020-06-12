@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
@@ -19,9 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import multicampus.project.multigo.R;
 import multicampus.project.multigo.data.BasketItemVO;
-import multicampus.project.multigo.fragment.basket.dummy.DummyContent;
 import multicampus.project.multigo.utils.AppHelper;
-import multicampus.project.multigo.utils.SharedMsg;
 
 /**
  * A fragment representing a list of Items.
@@ -57,12 +54,12 @@ public class BasketFragment extends Fragment{
         view = inflater.inflate(R.layout.fragment_basket, container, false);
 
         recyclerView = view.findViewById(R.id.basket_list);
-
-        Button sendBtn = view.findViewById(R.id.send_basket_btn);
-        sendBtn.setOnClickListener(v -> {
-            SharedMsg.getInstance().addMsg(AppHelper.ADD_LIST + DummyContent.getSum());
-            SharedMsg.getInstance().addMsg(AppHelper.ADD_DETAIL + DummyContent.getJsonItems());
-        });
+//
+//        Button sendBtn = view.findViewById(R.id.send_basket_btn);
+//        sendBtn.setOnClickListener(v -> {
+//            SharedMsg.getInstance().addMsg(AppHelper.ADD_LIST + DummyContent.getSum());
+//            SharedMsg.getInstance().addMsg(AppHelper.ADD_DETAIL + DummyContent.getJsonItems());
+//        });
 
         FloatingActionButton floatingBtn = view.findViewById(R.id.floating_basket);
         floatingBtn.setOnClickListener(v -> {

@@ -89,7 +89,7 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mBasketItems.get(position);
         holder.mNameView.setText(mBasketItems.get(position).getName());
-        holder.mNumberView.setText("1");
+        holder.mNumberView.setText(String.valueOf(mBasketItems.get(position).getCnt()));
         holder.mPriceView.setText(String.valueOf(mBasketItems.get(position).getPrice()));
 
         holder.mView.setOnClickListener(v -> {

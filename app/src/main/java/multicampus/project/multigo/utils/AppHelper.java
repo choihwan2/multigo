@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import multicampus.project.multigo.data.BasketItemVO;
 import multicampus.project.multigo.data.ItemsVO;
 import multicampus.project.multigo.data.ListsVO;
 
@@ -79,6 +80,18 @@ public class AppHelper {
         }
         return item;
     }
+
+    public static String toJsonStringList(List<BasketItemVO> list){
+        String jsonString= "";
+        try {
+            jsonString = mapper.writeValueAsString(list);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return jsonString;
+    }
+
 
 
     public static void setIsEntered(boolean isEntered) {

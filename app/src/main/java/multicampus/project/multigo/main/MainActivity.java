@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
                 if (revString.startsWith(AppHelper.EXIT)){
                     Toast.makeText(getApplicationContext(),"매장에서 퇴장했습니다.",Toast.LENGTH_SHORT).show();
                     mEntranceRef.setValue(new userEnteredData("-1",false));
+                    SharedMsg.getInstance().addMsg(AppHelper.ADD_LIST + MainData.getInstance().getSum());
+                    SharedMsg.getInstance().addMsg(AppHelper.ADD_DETAIL + MainData.getInstance().getBasketList());
                 }
             }
         };
@@ -113,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
     @Override
     public void onBackPressed() {
         SharedMsg.getInstance().addMsg(AppHelper.TERMINATE);
-        Log.d("MainActivity", "onBackPressed 호출");
         finish();
     }
 

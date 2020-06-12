@@ -49,4 +49,12 @@ public class MainData {
     public List<ListsVO> getUserLists() {
         return userLists;
     }
+
+    public int getSum() {
+        int sum = 0;
+        for (BasketItemVO item : basketList) {
+            sum += item.getPrice();
+        }
+        return sum;
+    }
 }

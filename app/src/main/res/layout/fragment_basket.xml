@@ -43,7 +43,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/basket_list"
         app:layout_constraintEnd_toEndOf="@id/basket_list"
-        app:rippleColor="@android:color/holo_orange_dark"/>
+        app:rippleColor="@android:color/holo_orange_dark"
+        />
 
 
 
