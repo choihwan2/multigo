@@ -1,9 +1,12 @@
 package multicampus.project.multigo.main;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.List;
 
 import multicampus.project.multigo.data.BasketItemVO;
 import multicampus.project.multigo.data.ListsVO;
+import multicampus.project.multigo.utils.AppHelper;
 
 public class MainData {
 
@@ -56,5 +59,11 @@ public class MainData {
             sum += item.getPrice();
         }
         return sum;
+    }
+
+    public void clearData(){
+        basketList.clear();
+        basketKeys.clear();
+        FirebaseDatabase.getInstance().getReference().child(AppHelper.BASKET_REF).child(AppHelper.getUserId()).removeValue();
     }
 }

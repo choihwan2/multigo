@@ -48,4 +48,11 @@
         android:name="multicampus.project.multigo.fragment.mores.MoresFragment"
         android:label="@string/title_more"
         tools:layout="@layout/fragment_more" />
+
+    <fragment
+        android:id="@+id/navigation_maps"
+        android:name="multicampus.project.multigo.fragment.notifications.MapsFragment"
+        android:label="Maps"
+
+        />
 </navigation>

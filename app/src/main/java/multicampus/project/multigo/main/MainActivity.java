@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
                 assert revString != null;
                 if (revString.startsWith(AppHelper.ENTER)){
                     Log.d("MainActivity","Enter 들어옴");
-                    Log.d("MainActivity", revString + "메시지 받음");
                     Toast.makeText(getApplicationContext(),"매장에 입장하였습니다.",Toast.LENGTH_SHORT).show();
                     mEntranceRef.setValue(new userEnteredData(revString.split(" ")[1],true));
                 }
@@ -70,7 +69,8 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
                     Toast.makeText(getApplicationContext(),"매장에서 퇴장했습니다.",Toast.LENGTH_SHORT).show();
                     mEntranceRef.setValue(new userEnteredData("-1",false));
                     SharedMsg.getInstance().addMsg(AppHelper.ADD_LIST + MainData.getInstance().getSum());
-                    SharedMsg.getInstance().addMsg(AppHelper.ADD_DETAIL + MainData.getInstance().getBasketList());
+                    SharedMsg.getInstance().addMsg(AppHelper.ADD_DETAIL + AppHelper.toJsonStringList(MainData.getInstance().getBasketList()));
+                    MainData.getInstance().clearData();
                 }
             }
         };

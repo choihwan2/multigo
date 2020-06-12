@@ -45,7 +45,6 @@ public class BasketFragment extends Fragment{
 
         mBasketRef = FirebaseDatabase.getInstance().getReference().child(AppHelper.BASKET_REF).child(AppHelper.getUserId());
 
-        Log.d("BasketFragment","프래그먼트가 생성되었습니다!");
     }
 
     @Override
@@ -54,12 +53,6 @@ public class BasketFragment extends Fragment{
         view = inflater.inflate(R.layout.fragment_basket, container, false);
 
         recyclerView = view.findViewById(R.id.basket_list);
-//
-//        Button sendBtn = view.findViewById(R.id.send_basket_btn);
-//        sendBtn.setOnClickListener(v -> {
-//            SharedMsg.getInstance().addMsg(AppHelper.ADD_LIST + DummyContent.getSum());
-//            SharedMsg.getInstance().addMsg(AppHelper.ADD_DETAIL + DummyContent.getJsonItems());
-//        });
 
         FloatingActionButton floatingBtn = view.findViewById(R.id.floating_basket);
         floatingBtn.setOnClickListener(v -> {
