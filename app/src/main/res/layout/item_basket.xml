@@ -29,13 +29,33 @@
         app:layout_constraintLeft_toRightOf="@id/item_vertical_gl"/>
 
     <TextView
+        android:id="@+id/product_count_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="수량 : "
+        app:layout_constraintLeft_toRightOf="@id/item_vertical_gl"
+        app:layout_constraintTop_toBottomOf="@id/product_name"
+        app:layout_constraintBottom_toTopOf="@id/product_price"
+        />
+
+    <TextView
         android:id="@+id/product_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="수량"
         app:layout_constraintTop_toBottomOf="@id/product_name"
         app:layout_constraintBottom_toTopOf="@id/product_price"
-        app:layout_constraintLeft_toRightOf="@id/item_vertical_gl"/>
+        app:layout_constraintLeft_toRightOf="@id/product_count_tv"/>
+
+    <TextView
+        android:id="@+id/product_price_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가격 : "
+        app:layout_constraintLeft_toRightOf="@id/item_vertical_gl"
+        app:layout_constraintTop_toBottomOf="@id/product_count"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
     <TextView
         android:id="@+id/product_price"
@@ -43,7 +63,7 @@
         android:layout_height="wrap_content"
         tools:text="상품 가격"
         app:layout_constraintTop_toBottomOf="@id/product_count"
-        app:layout_constraintLeft_toRightOf="@id/item_vertical_gl"
+        app:layout_constraintLeft_toRightOf="@id/product_price_tv"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <Button

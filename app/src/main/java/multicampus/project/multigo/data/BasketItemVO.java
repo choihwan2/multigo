@@ -1,6 +1,7 @@
 package multicampus.project.multigo.data;
 
 public class BasketItemVO {
+    private int list_id;
     private String item_id;
     private String name;
     private int price;
@@ -11,10 +12,19 @@ public class BasketItemVO {
     }
 
     public BasketItemVO(String item_id, String name, int price, int cnt) {
+        this.list_id = 1;
         this.item_id = item_id;
         this.name = name;
         this.price = price;
         this.cnt = cnt;
+    }
+
+    public int getList_id() {
+        return list_id;
+    }
+
+    public void setList_id(int list_id) {
+        this.list_id = list_id;
     }
 
     public int getCnt() {

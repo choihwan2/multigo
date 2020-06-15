@@ -19,13 +19,11 @@
         android:title="@string/title_receipts" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_stores" />
-
-    <item
         android:id="@+id/navigation_more"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_user_cog_solid"
         android:title="@string/title_more" />
+
+
+
 
 </menu>

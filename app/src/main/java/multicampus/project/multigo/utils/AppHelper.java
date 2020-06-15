@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import multicampus.project.multigo.data.BasketItemVO;
 import multicampus.project.multigo.data.ItemsVO;
 import multicampus.project.multigo.data.ListsVO;
 
@@ -40,6 +41,7 @@ public class AppHelper {
     public static final String ADD_DETAIL = "@@AddLais ";
     public static final String TERMINATE = "@@Terminate";
     public static final String THREAD_STOP = "@@STOP";
+    public static final String ITEM_START = "ITEM";
 
     /*
         NOTE : Firebase 에서 사용되는 정보들
@@ -78,6 +80,18 @@ public class AppHelper {
         }
         return item;
     }
+
+    public static String toJsonStringList(List<BasketItemVO> list){
+        String jsonString= "";
+        try {
+            jsonString = mapper.writeValueAsString(list);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return jsonString;
+    }
+
 
 
     public static void setIsEntered(boolean isEntered) {

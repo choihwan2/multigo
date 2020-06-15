@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.history.PurchaseHistoryFragment">
+    tools:context=".fragment.history.PurchaseHistoryFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/history_list"
@@ -13,7 +13,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".ui.basket.PurchaseHistoryFragment"
+        tools:context=".fragment.basket.PurchaseHistoryFragment"
         tools:listitem="@layout/item_history"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>

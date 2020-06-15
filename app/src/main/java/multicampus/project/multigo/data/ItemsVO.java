@@ -39,8 +39,8 @@ public class ItemsVO {
         this.price = price;
     }
 
-    public BasketItemVO toBasketItem() {
-        BasketItemVO basketItemVO = new BasketItemVO(item_id, name, price, 1);
+    public BasketItemVO toBasketItem(int cnt) {
+        BasketItemVO basketItemVO = new BasketItemVO(item_id, name, price * cnt, cnt);
         return basketItemVO;
     }
 }
