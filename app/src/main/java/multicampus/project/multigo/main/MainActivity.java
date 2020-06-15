@@ -1,7 +1,6 @@
 package multicampus.project.multigo.main;
 
 import android.annotation.SuppressLint;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,7 +26,7 @@ import java.util.concurrent.Executors;
 
 import multicampus.project.multigo.R;
 import multicampus.project.multigo.data.BasketItemVO;
-import multicampus.project.multigo.data.userEnteredData;
+import multicampus.project.multigo.data.UserEnteredData;
 import multicampus.project.multigo.fragment.basket.BasketFragment;
 import multicampus.project.multigo.runnable.MainRunnable;
 import multicampus.project.multigo.utils.AppHelper;
@@ -63,11 +62,11 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
                 if (revString.startsWith(AppHelper.ENTER)){
                     Log.d("MainActivity","Enter 들어옴");
                     Toast.makeText(getApplicationContext(),"매장에 입장하였습니다.",Toast.LENGTH_SHORT).show();
-                    mEntranceRef.setValue(new userEnteredData(revString.split(" ")[1],true));
+                    mEntranceRef.setValue(new UserEnteredData(revString.split(" ")[1],true));
                 }
                 if (revString.startsWith(AppHelper.EXIT)){
                     Toast.makeText(getApplicationContext(),"매장에서 퇴장했습니다.",Toast.LENGTH_SHORT).show();
-                    mEntranceRef.setValue(new userEnteredData("-1",false));
+                    mEntranceRef.setValue(new UserEnteredData("-1",false));
                     SharedMsg.getInstance().addMsg(AppHelper.ADD_LIST + MainData.getInstance().getSum());
                     SharedMsg.getInstance().addMsg(AppHelper.ADD_DETAIL + AppHelper.toJsonStringList(MainData.getInstance().getBasketList()));
                     MainData.getInstance().clearData();
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
         ValueEventListener entranceListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userEnteredData entDate = dataSnapshot.getValue(userEnteredData.class);
+                UserEnteredData entDate = dataSnapshot.getValue(UserEnteredData.class);
                 if(entDate != null) {
                     AppHelper.setIsEntered(entDate.isEnterState());
                     Log.d("MainActivity","enterState 변경됨");
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements BasketFragment.On
                         navController.navigate(R.id.action_navigation_home_refresh);
                     }
                 }else {
-                    mEntranceRef.setValue(new userEnteredData("-1",false));
+                    mEntranceRef.setValue(new UserEnteredData("-1",false));
                 }
             }
 

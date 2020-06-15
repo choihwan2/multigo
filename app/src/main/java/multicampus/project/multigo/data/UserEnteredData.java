@@ -7,15 +7,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @IgnoreExtraProperties
-public class userEnteredData {
+public class UserEnteredData {
     private String id;
     private boolean enterState;
 
-    public userEnteredData() {
+    public UserEnteredData() {
 
     }
 
-    public userEnteredData(String id, boolean enterState) {
+    public UserEnteredData(String id, boolean enterState) {
         this.id = id;
         this.enterState = enterState;
     }

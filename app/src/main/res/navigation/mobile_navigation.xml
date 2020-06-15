@@ -38,21 +38,8 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="multicampus.project.multigo.fragment.notifications.NotificationsFragment"
-        android:label="@string/title_stores"
-        tools:layout="@layout/fragment_notifications" />
-
-    <fragment
         android:id="@+id/navigation_more"
         android:name="multicampus.project.multigo.fragment.mores.MoresFragment"
         android:label="@string/title_more"
         tools:layout="@layout/fragment_more" />
-
-    <fragment
-        android:id="@+id/navigation_maps"
-        android:name="multicampus.project.multigo.fragment.notifications.MapsFragment"
-        android:label="Maps"
-
-        />
 </navigation>

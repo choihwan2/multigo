@@ -17,7 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import multicampus.project.multigo.R;
-import multicampus.project.multigo.data.userEnteredData;
+import multicampus.project.multigo.data.UserEnteredData;
 import multicampus.project.multigo.utils.AppHelper;
 
 public class NotificationsFragment extends Fragment {
@@ -36,7 +36,7 @@ public class NotificationsFragment extends Fragment {
         btn.setOnClickListener(v ->{
             Log.d("Noti", entranceRef.toString());
             Log.d("Noti",FirebaseAuth.getInstance().getCurrentUser().getUid());
-            userEnteredData userEnteredData = new userEnteredData("1",false);
+            UserEnteredData userEnteredData = new UserEnteredData("1",false);
             entranceRef.child(AppHelper.getUserId()).push().setValue(userEnteredData);
 //            myRef.setValue("hello");
         });
