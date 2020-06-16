@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +90,7 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mBasketItems.get(position);
+        Picasso.get().load(mBasketItems.get(position).getImage()).into(holder.mImgView);
         holder.mNameView.setText(mBasketItems.get(position).getName());
         holder.mNumberView.setText(String.valueOf(mBasketItems.get(position).getCnt()));
         holder.mPriceView.setText(String.valueOf(mBasketItems.get(position).getPrice()));
@@ -112,6 +115,7 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
         final TextView mPriceView;
         final TextView mNumberView;
         final Button mDeleteBtn;
+        final ImageView mImgView;
         BasketItemVO mItem;
 
         ViewHolder(View view) {
@@ -121,6 +125,7 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
             mNumberView = view.findViewById(R.id.product_count);
             mPriceView = view.findViewById(R.id.product_price);
             mDeleteBtn = view.findViewById(R.id.product_cancel_btn);
+            mImgView = view.findViewById(R.id.product_img);
         }
 
         @Override

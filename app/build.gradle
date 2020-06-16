@@ -8,6 +8,7 @@ android {
         applicationId "multicampus.project.multigo"
         minSdkVersion 16
         targetSdkVersion 29
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -41,6 +42,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'com.google.firebase:firebase-analytics:17.4.0'
     implementation 'com.yydcdut:sdlv:0.7.6'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'com.fasterxml.jackson.core:jackson-core:2.9.7'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.7'

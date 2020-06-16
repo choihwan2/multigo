@@ -4,6 +4,7 @@ public class BasketItemVO {
     private int list_id;
     private String item_id;
     private String name;
+    private String image;
     private int price;
     private int cnt;
 
@@ -11,12 +12,13 @@ public class BasketItemVO {
 
     }
 
-    public BasketItemVO(String item_id, String name, int price, int cnt) {
+    public BasketItemVO(String item_id, String name, int price, int cnt,String image) {
         this.list_id = 1;
         this.item_id = item_id;
         this.name = name;
         this.price = price;
         this.cnt = cnt;
+        this.image = image;
     }
 
     public int getList_id() {
@@ -59,5 +61,11 @@ public class BasketItemVO {
         this.price = price;
     }
 
+    public String getImage() {
+        return image;
+    }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
 }
