@@ -4,14 +4,16 @@ public class ItemsVO {
     private String item_id;
     private String name;
     private int price;
+    private String image;
 
     ItemsVO(){
     }
 
-    public ItemsVO(String item_id, String name, int price, int cnt) {
+    public ItemsVO(String item_id, String name, int price, int cnt,String image) {
         this.item_id = item_id;
         this.name = name;
         this.price = price;
+        this.image = image;
     }
 
 
@@ -39,8 +41,18 @@ public class ItemsVO {
         this.price = price;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public BasketItemVO toBasketItem(int cnt) {
-        BasketItemVO basketItemVO = new BasketItemVO(item_id, name, price * cnt, cnt);
+        BasketItemVO basketItemVO = new BasketItemVO(item_id, name, price * cnt, cnt,image);
         return basketItemVO;
     }
+
+
 }
