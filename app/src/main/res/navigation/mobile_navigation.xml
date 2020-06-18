@@ -4,28 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
+    <action
+        android:id="@+id/action_navigation_home_to_navigation_basket"
+        app:destination="@id/navigation_basket" />
 
+    <action
+        android:id="@+id/action_navigation_home_refresh"
+        app:destination="@id/navigation_home"/>
     <fragment
         android:id="@+id/navigation_home"
-        android:name="multicampus.project.multigo.ui.home.HomeFragment"
+        android:name="multicampus.project.multigo.fragment.home.HomeFragment"
         android:label="@string/title_key"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_history"
+            app:destination="@id/navigation_history" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_basket"
+        android:name="multicampus.project.multigo.fragment.basket.BasketFragment"
+        android:label="장바구니"
+        tools:layout="@layout/fragment_item_list"/>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="multicampus.project.multigo.ui.history.PurchaseHistoryFragment"
+        android:id="@+id/navigation_history"
+        android:name="multicampus.project.multigo.fragment.history.PurchaseHistoryFragment"
         android:label="@string/title_receipts"
-        tools:layout="@layout/fragment_purchase_history" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="multicampus.project.multigo.ui.notifications.NotificationsFragment"
-        android:label="@string/title_stores"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_purchase_history" >
+        <action
+            android:id="@+id/action_navigation_history_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_more"
-        android:name="multicampus.project.multigo.ui.mores.MoresFragment"
+        android:name="multicampus.project.multigo.fragment.mores.MoresFragment"
         android:label="@string/title_more"
         tools:layout="@layout/fragment_more" />
 </navigation>
