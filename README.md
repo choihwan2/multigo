@@ -24,6 +24,5 @@
 
 ## 시연영상
 https://youtu.be/sw6VKQuk5RU
-<iframe width="1280" height="720" src="https://www.youtube.com/embed/sw6VKQuk5RU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
